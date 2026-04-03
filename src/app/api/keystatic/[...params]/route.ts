@@ -1,18 +1,14 @@
 /**
- * Keystatic API route handler
- * Handles: OAuth callback, content reads/writes via GitHub API
+ * Keystatic API route handler — Vercel only.
+ * Handles OAuth callbacks and content reads/writes via the GitHub API.
  *
- * dynamic = "force-static"  → cPanel build (STATIC_EXPORT=true)
- *   Next.js requires this flag to skip the route during static export.
- *   The route is NOT included in the /out directory — it's just omitted cleanly.
- *
- * dynamic = "force-dynamic" → Vercel
- *   Normal server-side route handler, fully active.
+ * This file is deleted by the GitHub Actions workflow before the static
+ * export build runs, so it is never included in the cPanel output.
+ * On Vercel (full Next.js), it runs normally as a server-side route.
  */
-export const dynamic =
-  process.env.STATIC_EXPORT === "true" ? "force-static" : "force-dynamic";
-
 import { makeRouteHandler } from "@keystatic/next/route-handler";
 import keystaticConfig from "../../../../../keystatic.config";
+
+export const dynamic = "force-dynamic";
 
 export const { GET, POST } = makeRouteHandler({ config: keystaticConfig });
