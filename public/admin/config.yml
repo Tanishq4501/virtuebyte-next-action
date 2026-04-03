@@ -1,25 +1,24 @@
 # ============================================================
-# Decap CMS Configuration for VirtuByte
+# Decap CMS Configuration — VirtuByte
 # ============================================================
-# SETUP REQUIRED:
-#   1. Replace YOUR_GITHUB_USERNAME/YOUR_REPO_NAME below
-#   2. Replace YOUR_OAUTH_PROVIDER_URL with your deployed
-#      OAuth provider URL (see .github/workflows/deploy.yml
-#      comments for setup instructions)
+# SETUP REQUIRED (2 places marked YOUR_NETLIFY_SITE):
+#   Replace with the subdomain Netlify assigns your site,
+#   e.g.  shiny-caribou-a1b2c3  →  shiny-caribou-a1b2c3.netlify.app
 # ============================================================
 
 backend:
-  name: github
-  repo: Tanishq4501/virtuebyte-next-action
+  name: git-gateway
+  # Points to the Git Gateway function on your Netlify site.
+  # Writers authenticate through Netlify Identity — no GitHub account needed.
+  gateway_url: https://YOUR_NETLIFY_SITE.netlify.app/.netlify/functions/git-gateway
   branch: main
-  base_url: https://virtuebyte-next-action.onrender.com
 
-# Enables Draft -> In Review -> Ready workflow
+# Enables Draft → In Review → Ready workflow
 publish_mode: editorial_workflow
 
-# Where uploaded images are stored in the repo
+# Where uploaded images are physically stored in the repo
 media_folder: public/images/blog
-# Public URL path for images (matches Next.js public dir)
+# Public URL path served by Next.js (matches /public structure)
 public_folder: /images/blog
 
 collections:
@@ -28,16 +27,16 @@ collections:
     label_singular: Blog Post
     folder: content/blog
     create: true
-    # Filename = slugified title
+    # Filename is auto-generated from the post title
     slug: "{{slug}}"
-    # File extension
     extension: mdx
     format: frontmatter
+
     fields:
       - label: Title
         name: title
         widget: string
-        hint: "The post title shown on the blog listing and post page."
+        hint: "The post headline shown on the blog listing and post page."
 
       - label: Publish Date
         name: date
@@ -45,35 +44,35 @@ collections:
         format: "YYYY-MM-DD"
         date_format: "YYYY-MM-DD"
         time_format: false
-        hint: "Date the post is published. Used for sorting."
+        hint: "Controls post sort order on the blog listing."
 
       - label: Excerpt
         name: excerpt
         widget: text
-        hint: "Short summary shown on the blog listing page (1-2 sentences)."
+        hint: "1–2 sentence summary shown on the blog card."
 
       - label: Meta Description
         name: metaDescription
         widget: text
-        hint: "SEO description shown in Google search results (150-160 characters recommended)."
+        hint: "SEO description for Google (150–160 characters recommended). Keep it different from the excerpt."
 
       - label: Featured Image
         name: featuredImage
         widget: image
-        hint: "Hero image for the post. Will be stored in /public/images/blog/."
+        hint: "Hero image for the post. Upload from your computer — stored automatically in /public/images/blog/."
 
       - label: Tags
         name: tags
         widget: list
-        hint: "Comma-separated topic tags (e.g. Salesforce, Manufacturing, AI)."
+        hint: "Topic tags separated by commas (e.g. Salesforce, AI, Manufacturing)."
 
       - label: Author
         name: author
         widget: string
         required: false
-        hint: "Optional. Author name displayed on the post."
+        hint: "Optional. Author name displayed on the post page."
 
       - label: Body
         name: body
         widget: markdown
-        hint: "Main post content. Supports Markdown formatting."
+        hint: "Main post content. Use the toolbar for headings, bold, links, and images."

@@ -1,16 +1,16 @@
 # ============================================================
-# GitHub Actions: Build Next.js and Deploy to cPanel via FTP
+# GitHub Actions: Build Next.js static export → Deploy to cPanel
 # ============================================================
 # SETUP REQUIRED — add these secrets in:
 #   GitHub repo → Settings → Secrets and variables → Actions
 #
-#   FTP_SERVER    your cPanel FTP hostname (e.g. ftp.yourdomain.com)
-#   FTP_USERNAME  your cPanel FTP username
-#   FTP_PASSWORD  your cPanel FTP password
+#   FTP_SERVER    cPanel FTP hostname  (e.g. ftp.virtuebytech.com)
+#   FTP_USERNAME  cPanel FTP username
+#   FTP_PASSWORD  cPanel FTP password
 #
-# OPTIONAL — change FTP server-dir to match your web root:
-#   /public_html/          → root of your domain
-#   /public_html/blog/     → subdirectory
+# NOTE: STATIC_EXPORT=true tells next.config.ts to run as a
+# pure static export (no API routes). Keystatic admin runs on
+# Vercel (which does NOT set this flag) and is not affected.
 # ============================================================
 
 name: Build and Deploy to cPanel
@@ -18,7 +18,7 @@ name: Build and Deploy to cPanel
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build-and-deploy:
@@ -60,8 +60,12 @@ jobs:
             console.log('All frontmatter valid.');
           "
 
-      - name: Build static site
+      - name: Build static export for cPanel
         run: npm run build
+        env:
+          # Activates output: "export" in next.config.ts
+          # Keystatic API routes are skipped — they only run on Vercel
+          STATIC_EXPORT: "true"
 
       - name: Deploy to cPanel via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -71,5 +75,4 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./out/
           server-dir: /public_html/
-          # Only upload changed files (faster deploys)
           dangerous-clean-slate: false

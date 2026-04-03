@@ -5,8 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <title>VirtuByte CMS</title>
+    <!-- Netlify Identity Widget — handles email/password login for writers -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
+    <!-- Decap CMS core -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script>
+      /**
+       * Since the CMS is served from cPanel (not Netlify), we must
+       * point the Identity widget at the Netlify site that holds
+       * Identity + Git Gateway. Replace the URL below with yours.
+       */
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.setAPIURL("https://YOUR_NETLIFY_SITE.netlify.app");
+
+        window.netlifyIdentity.on("init", function (user) {
+          if (!user) {
+            window.netlifyIdentity.on("login", function () {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
   </body>
 </html>

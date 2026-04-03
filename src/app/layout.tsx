@@ -1,9 +1,8 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { Fira_Sans, Outfit, Lato } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import ConditionalLayout from "@/components/layout/ConditionalLayout";
 
 const firaSans = Fira_Sans({
  variable: "--font-fira-sans",
@@ -73,7 +72,7 @@ export default function RootLayout({
  children: React.ReactNode;
 }>) {
  return (
- <html lang="en"    >
+ <html lang="en">
  <head>
  <meta charSet="UTF-8" />
  <Script
@@ -133,11 +132,8 @@ gtag('config', 'G-WT3KJTGEN5');`}
  <body
  className={`${firaSans.variable} ${outfit.variable} ${lato.variable} antialiased`}
  >
- <Header />
- <main className="pt-[70px]">{children}</main>
- <Footer />
+ <ConditionalLayout>{children}</ConditionalLayout>
  </body>
  </html>
  );
 }
-
