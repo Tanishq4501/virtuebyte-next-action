@@ -9,7 +9,9 @@
       "Bash(mkdir -p \"D:/backup2/virtubyte-next/src/app/api/keystatic/[...params]\")",
       "WebFetch(domain:www.npmjs.com)",
       "WebFetch(domain:raw.githubusercontent.com)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:registry.npmjs.org)",
+      "Bash(node -e \":*)"
     ]
   }
 }
