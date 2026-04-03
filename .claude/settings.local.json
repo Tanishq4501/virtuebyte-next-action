@@ -6,7 +6,10 @@
       "WebFetch(domain:keystatic.com)",
       "WebSearch",
       "Bash(mkdir -p \"D:/backup2/virtubyte-next/src/app/keystatic/[[...params]]\")",
-      "Bash(mkdir -p \"D:/backup2/virtubyte-next/src/app/api/keystatic/[...params]\")"
+      "Bash(mkdir -p \"D:/backup2/virtubyte-next/src/app/api/keystatic/[...params]\")",
+      "WebFetch(domain:www.npmjs.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:github.com)"
     ]
   }
 }
