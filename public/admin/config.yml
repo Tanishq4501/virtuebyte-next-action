@@ -10,8 +10,8 @@
 
 backend:
   name: github
-  repo: YOUR_GITHUB_USERNAME/YOUR_REPO_NAME
-  branch: master
+  repo: Tanishq4501/virtuebyte-next-action
+  branch: main
   base_url: https://YOUR_OAUTH_PROVIDER_URL
 
 # Enables Draft -> In Review -> Ready workflow
