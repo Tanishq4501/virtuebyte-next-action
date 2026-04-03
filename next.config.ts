@@ -7,11 +7,17 @@ import type { NextConfig } from "next";
 const isStaticExport = process.env.STATIC_EXPORT === "true";
 
 const nextConfig: NextConfig = {
+  // output: "export" only for the cPanel static build (GitHub Actions)
   ...(isStaticExport && { output: "export" }),
+
+  // trailingSlash only for the cPanel static build.
+  // On Vercel, trailingSlash: true causes a 308 redirect on every OAuth
+  // callback URL, which breaks Keystatic Cloud's state validation.
+  ...(isStaticExport && { trailingSlash: true }),
+
   images: {
     unoptimized: true,
   },
-  trailingSlash: true,
 };
 
 export default nextConfig;
