@@ -1,0 +1,75 @@
+# ============================================================
+# GitHub Actions: Build Next.js and Deploy to cPanel via FTP
+# ============================================================
+# SETUP REQUIRED — add these secrets in:
+#   GitHub repo → Settings → Secrets and variables → Actions
+#
+#   FTP_SERVER    your cPanel FTP hostname (e.g. ftp.yourdomain.com)
+#   FTP_USERNAME  your cPanel FTP username
+#   FTP_PASSWORD  your cPanel FTP password
+#
+# OPTIONAL — change FTP server-dir to match your web root:
+#   /public_html/          → root of your domain
+#   /public_html/blog/     → subdirectory
+# ============================================================
+
+name: Build and Deploy to cPanel
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint frontmatter (catch broken posts before deploy)
+        run: |
+          node -e "
+            const fs = require('fs');
+            const path = require('path');
+            const matter = require('gray-matter');
+            const dir = 'content/blog';
+            const required = ['title', 'date', 'excerpt', 'metaDescription', 'featuredImage', 'tags'];
+            let errors = 0;
+            fs.readdirSync(dir).filter(f => f.endsWith('.mdx')).forEach(file => {
+              const { data } = matter(fs.readFileSync(path.join(dir, file), 'utf-8'));
+              required.forEach(field => {
+                if (!data[field]) {
+                  console.error('MISSING field [' + field + '] in ' + file);
+                  errors++;
+                }
+              });
+            });
+            if (errors > 0) process.exit(1);
+            console.log('All frontmatter valid.');
+          "
+
+      - name: Build static site
+        run: npm run build
+
+      - name: Deploy to cPanel via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./out/
+          server-dir: /public_html/
+          # Only upload changed files (faster deploys)
+          dangerous-clean-slate: false

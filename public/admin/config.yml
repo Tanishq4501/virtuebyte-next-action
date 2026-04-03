@@ -1,0 +1,79 @@
+# ============================================================
+# Decap CMS Configuration for VirtuByte
+# ============================================================
+# SETUP REQUIRED:
+#   1. Replace YOUR_GITHUB_USERNAME/YOUR_REPO_NAME below
+#   2. Replace YOUR_OAUTH_PROVIDER_URL with your deployed
+#      OAuth provider URL (see .github/workflows/deploy.yml
+#      comments for setup instructions)
+# ============================================================
+
+backend:
+  name: github
+  repo: YOUR_GITHUB_USERNAME/YOUR_REPO_NAME
+  branch: master
+  base_url: https://YOUR_OAUTH_PROVIDER_URL
+
+# Enables Draft -> In Review -> Ready workflow
+publish_mode: editorial_workflow
+
+# Where uploaded images are stored in the repo
+media_folder: public/images/blog
+# Public URL path for images (matches Next.js public dir)
+public_folder: /images/blog
+
+collections:
+  - name: blog
+    label: Blog Posts
+    label_singular: Blog Post
+    folder: content/blog
+    create: true
+    # Filename = slugified title
+    slug: "{{slug}}"
+    # File extension
+    extension: mdx
+    format: frontmatter
+    fields:
+      - label: Title
+        name: title
+        widget: string
+        hint: "The post title shown on the blog listing and post page."
+
+      - label: Publish Date
+        name: date
+        widget: datetime
+        format: "YYYY-MM-DD"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        hint: "Date the post is published. Used for sorting."
+
+      - label: Excerpt
+        name: excerpt
+        widget: text
+        hint: "Short summary shown on the blog listing page (1-2 sentences)."
+
+      - label: Meta Description
+        name: metaDescription
+        widget: text
+        hint: "SEO description shown in Google search results (150-160 characters recommended)."
+
+      - label: Featured Image
+        name: featuredImage
+        widget: image
+        hint: "Hero image for the post. Will be stored in /public/images/blog/."
+
+      - label: Tags
+        name: tags
+        widget: list
+        hint: "Comma-separated topic tags (e.g. Salesforce, Manufacturing, AI)."
+
+      - label: Author
+        name: author
+        widget: string
+        required: false
+        hint: "Optional. Author name displayed on the post."
+
+      - label: Body
+        name: body
+        widget: markdown
+        hint: "Main post content. Supports Markdown formatting."
