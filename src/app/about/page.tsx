@@ -184,7 +184,7 @@ export default function AboutPage() {
                     <AnimatedSection animation="fadeInUp" delay={0.1}>
                         <div className="space-y-5 max-w-[750px] mx-auto">
                             <p className="text-[16px] sm:text-[18px] md:text-[19px] leading-[1.6] text-[#E0E0E0]">
-                                Virtuebyte Pvt Ltd is a technology-driven company providing IT consulting
+                                Virtuebyte is a technology-driven company providing IT consulting
                                 services and custom software development solutions to businesses across industries.
                             </p>
 
