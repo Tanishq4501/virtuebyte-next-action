@@ -1,4 +1,4 @@
-﻿import { MetadataRoute } from "next";
+import { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
 import fs from "fs";
 import path from "path";
@@ -15,36 +15,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const blogSitemaps: MetadataRoute.Sitemap = posts.map((post) => ({
     url: `${BASE_URL}/blog/${post.slug}/`,
     lastModified: post.updatedAt,
-    changeFrequency: "monthly",
     priority: 0.7,
   }));
 
-  const staticRoutes: Array<{
-    route: string;
-    changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
-    priority: number;
-  }> = [
-    { route: "/", changeFrequency: "weekly", priority: 1.0 },
-    { route: "/about", changeFrequency: "monthly", priority: 0.8 },
-    { route: "/services", changeFrequency: "monthly", priority: 0.9 },
-    { route: "/products", changeFrequency: "monthly", priority: 0.9 },
-    { route: "/case-studies", changeFrequency: "monthly", priority: 0.8 },
-    { route: "/blog", changeFrequency: "weekly", priority: 0.9 },
-    { route: "/contact", changeFrequency: "yearly", priority: 0.7 },
-    { route: "/services/salesforce-implementation", changeFrequency: "monthly", priority: 0.8 },
-    { route: "/services/ai-ml-consulting", changeFrequency: "monthly", priority: 0.8 },
-    { route: "/services/data-science-analytics", changeFrequency: "monthly", priority: 0.8 },
-    { route: "/services/offshore-development-centers", changeFrequency: "monthly", priority: 0.8 },
-    { route: "/services/cloud-services", changeFrequency: "monthly", priority: 0.8 },
-    { route: "/services/devops-consulting-services", changeFrequency: "monthly", priority: 0.8 },
-    { route: "/products/virtuelite", changeFrequency: "monthly", priority: 0.8 },
-    { route: "/products/virtunest", changeFrequency: "monthly", priority: 0.8 },
+  const staticRoutes: Array<{ route: string; priority: number }> = [
+    { route: "/", priority: 1.0 },
+    { route: "/about", priority: 0.8 },
+    { route: "/services", priority: 0.9 },
+    { route: "/products", priority: 0.9 },
+    { route: "/case-studies", priority: 0.8 },
+    { route: "/blog", priority: 0.9 },
+    { route: "/contact", priority: 0.7 },
+    { route: "/services/salesforce-implementation", priority: 0.8 },
+    { route: "/services/ai-ml-consulting", priority: 0.8 },
+    { route: "/services/data-science-analytics", priority: 0.8 },
+    { route: "/services/offshore-development-centers", priority: 0.8 },
+    { route: "/services/cloud-services", priority: 0.8 },
+    { route: "/services/devops-consulting-services", priority: 0.8 },
+    { route: "/products/virtuelite", priority: 0.8 },
+    { route: "/products/virtunest", priority: 0.8 },
   ];
 
-  const staticSitemaps: MetadataRoute.Sitemap = staticRoutes.map(({ route, changeFrequency, priority }) => ({
+  const staticSitemaps: MetadataRoute.Sitemap = staticRoutes.map(({ route, priority }) => ({
     url: `${BASE_URL}${route}/`,
     lastModified: DEFAULT_LAST_MODIFIED,
-    changeFrequency,
     priority,
   }));
 
@@ -61,7 +55,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
           return {
             url: `${BASE_URL}/${customPath}${customPath ? "/" : ""}`,
             lastModified: DEFAULT_LAST_MODIFIED,
-            changeFrequency: "monthly" as const,
             priority: entry.priority !== undefined ? entry.priority : 0.8,
           };
         });
@@ -73,4 +66,3 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [...staticSitemaps, ...blogSitemaps, ...customSitemaps];
 }
-
