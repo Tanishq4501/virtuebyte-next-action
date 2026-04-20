@@ -8,6 +8,7 @@ export interface BlogPost {
  slug: string;
  title: string;
  date: string;
+ updatedAt: string; // ISO timestamp from file system mtime — reflects actual last edit
  excerpt: string;
  metaDescription: string;
  featuredImage: string;
@@ -25,11 +26,13 @@ export function getAllPosts(): BlogPost[] {
  const filePath = path.join(BLOG_DIR, file);
  const fileContent = fs.readFileSync(filePath, "utf-8");
  const { data, content } = matter(fileContent);
+ const mtime = fs.statSync(filePath).mtime;
 
  return {
  slug,
  title: data.title || "",
  date: data.date || "",
+ updatedAt: mtime.toISOString(),
  excerpt: data.excerpt || "",
  metaDescription: data.metaDescription || "",
  featuredImage: data.featuredImage || "",

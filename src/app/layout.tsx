@@ -85,6 +85,7 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-WT3KJTGEN5');`}
  </Script>
+{/* TEMPORARILY DISABLED: content protection (right-click + copy/select prevention)
  <Script id="content-protection" strategy="afterInteractive">
  {`(function () {
 	const isEditable = (target) => {
@@ -128,6 +129,7 @@ gtag('config', 'G-WT3KJTGEN5');`}
 	}, true);
 })();`}
  </Script>
+		*/}
  </head>
  <body
  className={`${firaSans.variable} ${outfit.variable} ${lato.variable} antialiased`}

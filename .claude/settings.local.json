@@ -11,7 +11,13 @@
       "WebFetch(domain:raw.githubusercontent.com)",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:registry.npmjs.org)",
-      "Bash(node -e \":*)"
+      "Bash(node -e \":*)",
+      "Bash(node -e ' *)",
+      "Bash(npx tsc *)",
+      "Bash(npm ci *)",
+      "Bash(cp -r src/app/api/keystatic /tmp/keystatic-api-backup)",
+      "Bash(cp -r src/app/keystatic /tmp/keystatic-ui-backup)",
+      "Bash(STATIC_EXPORT=true npm run build)"
     ]
   }
 }
