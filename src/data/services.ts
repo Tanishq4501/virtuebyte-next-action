@@ -1,4 +1,4 @@
-﻿export const services = [
+export const services = [
  {
  id: "salesforce-implementation",
  title: "Salesforce Implementation Services",
@@ -54,7 +54,7 @@ export const serviceDetails: Record<string, {
  breadcrumb: string;
  sections: {
  heading?: string;
- cards: { title: string; description: string; image?: string; features?: string[]; footer?: string }[];
+ cards: { title: string; description: string; descriptionEmphasis?: boolean; image?: string; features?: string[]; footer?: string }[];
  }[];
 }> = {
  "salesforce-implementation": {
@@ -150,67 +150,77 @@ export const serviceDetails: Record<string, {
  cards: [
  {
  title: "AI Strategy & Advisory",
- description: "Successful AI adoption begins with clarity.",
+ description: "Transform Ideas into Actionable AI Roadmaps",
+ descriptionEmphasis: true,
  features: [
- "Define a structured AI adoption roadmap",
- "Identify high-impact use cases",
- "Conduct feasibility and ROI analysis",
- "Align AI initiatives with business KPIs",
+ "AI Readiness & Opportunity Assessment",
+ "AI Use Case Discovery Workshops",
+ "Business Process & Workflow Analysis",
+ "GenAI Adoption Strategy",
+ "AI Roadmap & Implementation Planning",
  ],
  footer:
- "We eliminate guesswork and ensure that AI investments generate measurable value through structured AI automation consulting frameworks.",
+ "We help organizations assess AI readiness, discover use cases, optimize workflows, and accelerate AI adoption with measurable outcomes.",
  image: "/images/new_img/Consultation and Requirement Gathering.jpeg",
  },
  {
- title: "ML Model Development",
- description: "We design and deploy custom machine learning models tailored to your operational needs as a leading machine learning consulting company.",
+ title: " Generative AI Solutions",
+ description: "Enterprise AI Experiences Powered by Generative Intelligence",
+ descriptionEmphasis: true,
  features: [
- "Predictive analytics models",
- "Recommendation engines",
- "Classification and regression models",
- "Time-series forecasting systems",
+ "Enterprise AI Copilot Development",
+ "Custom AI Chatbots & Virtual Assistants",
+ "Knowledge Search & RAG Solutions",
+ "AI Content & Document Generation",
+ "LLM Integration with Enterprise Systems",
  ],
  footer:
- "From prototype to production, we ensure models are scalable, secure, and optimized for performance.",
+ "Our solutions help businesses automate knowledge access, customer support, content generation, and enterprise workflows across internal systems.",
  image: "/images/services/ml-model-dev.webp",
  },
  {
- title: "AI Conversational Tools",
- description: "Enhance customer engagement and internal automation with intelligent conversational systems.",
+ title: " Agentic AI Automation",
+ description: "Intelligent AI Agents that Automate Operations.",
+ descriptionEmphasis: true,
  features: [
- "AI-powered chatbots",
- "Virtual assistants",
- "NLP-based customer interaction systems",
- "Automated support workflows",
+ "AI Workflow Automation",
+ "Autonomous AI Agents",
+ "Multi-Agent Orchestration",
+ "Human-in-the-Loop Automation",
+ "Enterprise Process Automation",
  ],
  footer:
- "These tools reduce manual workload while improving response speed and user experience through strategic AI automation consulting methodologies.",
+ "We build AI-driven automation systems that improve productivity and streamline enterprise operations.",
  image: "/images/services/ai-conversational.webp",
  },
  {
- title: "Data Preparation & Preprocessing",
- description: "AI performance depends on data quality.",
+ title: "Machine Learning Solutions",
+ description: "Predictive Intelligence for Smarter Decisions.",
+ descriptionEmphasis: true,
  features: [
- "Data cleansing and normalization",
- "ETL (Extract, Transform, Load) pipelines",
- "Feature engineering",
- "Structured dataset preparation",
+ "Predictive Analytics & Forecasting",
+ "Fraud & Anomaly Detection",
+ "Recommendation & Classification Systems",
+ "NLP & Intelligent Document Processing",
+ "Real-Time Analytics & Insights",
  ],
  footer:
- "Clean, structured data ensures higher model accuracy and reliability.",
+ "Our ML systems help businesses make smarter, data-driven decisions in real time.",
  image: "/images/new_img/Data Preparation & Preprocessing.jpeg",
  },
  {
- title: "AI Integration & Deployment",
- description: "AI should seamlessly integrate with your existing ecosystem.",
+ title: " AI Engineering & MLOps",
+ description: "Production-Ready AI Built for Scale.",
+ descriptionEmphasis: true,
  features: [
- "API integrations",
- "Enterprise system connectivity",
- "CI/CD workflow integration",
- "Cloud-based deployment across AWS and Azure",
+ "MLOps & CI/CD Pipelines",
+ "AI Model Deployment & Monitoring",
+ "Cloud-Native AI Infrastructure",
+ "AI APIs & Microservices Development",
+ "Kubernetes & Containerized Deployments",
  ],
  footer:
- "Our AI integration services ensure your intelligent systems operate smoothly within your current infrastructure.",
+ "We help businesses move AI from prototype to secure, production-ready environments.",
  image: "/images/services/ai-integration.webp",
  },
  ],
@@ -430,4 +440,3 @@ export const serviceDetails: Record<string, {
  ],
  },
 };
-

@@ -1,9 +1,10 @@
-﻿import Image from "next/image";
+import Image from "next/image";
 import AnimatedSection from "./AnimatedSection";
 
 interface IconBoxProps {
  title: string;
  description: string;
+ descriptionEmphasis?: boolean;
  image?: string;
  features?: string[];
  footer?: string;
@@ -15,6 +16,7 @@ interface IconBoxProps {
 export default function IconBox({
  title,
  description,
+ descriptionEmphasis = false,
  image,
  features,
  footer,
@@ -47,12 +49,18 @@ export default function IconBox({
  <h3 className="text-[18px] md:text-[24px] font-semibold font-fira text-white mb-2 leading-[1.4em] group-hover:text-primary transition-colors">
  {title}
  </h3>
- <p className="text-text-light text-[16px] md:text-[18px] leading-relaxed">{description}</p>
+ <p
+ className={`text-text-light text-[16px] md:text-[18px] leading-relaxed${
+ descriptionEmphasis ? " font-semibold" : ""
+ }`}
+ >
+ {description}
+ </p>
  {features && features.length > 0 && (
  <ul className="mt-4 space-y-2">
  {features.map((feature, index) => (
  <li key={index} className="text-text-light text-[16px] md:text-[18px] leading-relaxed flex items-start gap-2">
- <span className="text-primary mt-1 text-sm">{"\u2726"}</span>
+ <span className="text-primary mt-1 text-sm">{"✦"}</span>
  <span>{feature}</span>
  </li>
  ))}
@@ -66,4 +74,3 @@ export default function IconBox({
  </AnimatedSection>
  );
 }
-

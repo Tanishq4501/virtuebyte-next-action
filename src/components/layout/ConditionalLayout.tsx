@@ -8,6 +8,7 @@
 import { usePathname } from "next/navigation";
 import Header from "./Header";
 import Footer from "./Footer";
+import Chatbot from "@/components/ui/Chatbot";
 
 export default function ConditionalLayout({
   children,
@@ -26,6 +27,7 @@ export default function ConditionalLayout({
       <Header />
       <main className="pt-[70px]">{children}</main>
       <Footer />
+      <Chatbot />
     </>
   );
 }
