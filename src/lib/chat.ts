@@ -13,12 +13,10 @@ export function findBestFAQMatch(userQuestion: string): MatchResult {
   let highestConfidence = 0;
 
   for (const faq of faqData) {
-    // Exact match
     if (faq.question.toLowerCase() === normalizedQuestion) {
       return { faq, confidence: 1.0 };
     }
 
-    // Contains match
     if (
       normalizedQuestion.includes(faq.question.toLowerCase()) ||
       faq.question.toLowerCase().includes(normalizedQuestion)
@@ -26,7 +24,6 @@ export function findBestFAQMatch(userQuestion: string): MatchResult {
       return { faq, confidence: 0.9 };
     }
 
-    // Keyword match
     const keywordMatches = faq.keywords.filter((keyword) =>
       normalizedQuestion.includes(keyword.toLowerCase())
     );
@@ -38,7 +35,6 @@ export function findBestFAQMatch(userQuestion: string): MatchResult {
       }
     }
 
-    // Fuzzy similarity
     const similarity = compareTwoStrings(
       normalizedQuestion,
       faq.question.toLowerCase()
