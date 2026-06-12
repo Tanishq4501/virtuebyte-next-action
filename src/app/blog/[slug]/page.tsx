@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import Image from "next/image";
+import LazyImage from "@/components/ui/LazyImage";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -76,7 +76,7 @@ export default async function BlogPostPage({ params }: Props) {
 
  {/* Featured Image */}
  <div className="relative w-full h-64 md:h-96 rounded-[20px] overflow-hidden mb-8">
- <Image
+ <LazyImage
  src={post.featuredImage}
  alt={`${post.title} featured image`}
  fill
@@ -146,7 +146,7 @@ export default async function BlogPostPage({ params }: Props) {
  className="flex gap-4 group items-center"
  >
  <div className="relative w-[70px] h-[70px] rounded-[10px] overflow-hidden flex-shrink-0">
- <Image
+ <LazyImage
  src={p.featuredImage}
  alt={`${p.title} thumbnail`}
  fill
@@ -182,7 +182,7 @@ export default async function BlogPostPage({ params }: Props) {
  <div key={p.slug} className="relative bg-[#E5A2FF0A] rounded-[20px] overflow-hidden border border-[#E5A2FF0A] hover:shadow-[0px_5px_30px_0px_rgba(0,0,0,0.41)] transition-all duration-300 hover-bob flex flex-col">
  <div className="absolute inset-0 bg-[radial-gradient(at_top_left,#F6921E_0%,#FFFFFF00_50%)] opacity-20 pointer-events-none rounded-[20px]" />
  <div className="relative h-44 overflow-hidden rounded-t-[20px]">
- <Image
+ <LazyImage
  src={p.featuredImage}
  alt={`${p.title} related post image`}
  fill

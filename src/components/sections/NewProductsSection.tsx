@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import LazyImage from "@/components/ui/LazyImage";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 
 import { products } from "@/data/content";
@@ -34,7 +34,7 @@ export default function NewProductsSection() {
               <div className="group h-full bg-[#E5A2FF0A] border border-[#E5A2FF0A] rounded-[18px] overflow-hidden transition-all duration-300 hover:shadow-[0px_8px_30px_rgba(0,0,0,0.35)] hover:-translate-y-1">
                 {/* Image */}
                 <div className="relative h-48 md:h-52 overflow-hidden">
-                  <Image
+                  <LazyImage
                     src={product.image}
                     alt={product.title}
                     fill

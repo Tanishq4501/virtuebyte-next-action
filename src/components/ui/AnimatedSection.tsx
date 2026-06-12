@@ -1,32 +1,15 @@
 ﻿"use client";
 
-import { motion, type Variant } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
 
 type AnimationType = "fadeInUp" | "fadeIn" | "fadeInLeft" | "fadeInRight" | "scaleIn";
 
-const variants: Record<AnimationType, { hidden: Variant; visible: Variant }> = {
- fadeInUp: {
- hidden: { opacity: 0, y: 40 },
- visible: { opacity: 1, y: 0 },
- },
- fadeIn: {
- hidden: { opacity: 0 },
- visible: { opacity: 1 },
- },
- fadeInLeft: {
- hidden: { opacity: 0, x: -40 },
- visible: { opacity: 1, x: 0 },
- },
- fadeInRight: {
- hidden: { opacity: 0, x: 40 },
- visible: { opacity: 1, x: 0 },
- },
- scaleIn: {
- hidden: { opacity: 0, scale: 0.9 },
- visible: { opacity: 1, scale: 1 },
- },
+const initialTransforms: Record<AnimationType, string> = {
+ fadeInUp: "translate3d(0, 40px, 0)",
+ fadeIn: "none",
+ fadeInLeft: "translate3d(-40px, 0, 0)",
+ fadeInRight: "translate3d(40px, 0, 0)",
+ scaleIn: "scale(0.9)",
 };
 
 interface AnimatedSectionProps {
@@ -44,23 +27,50 @@ export default function AnimatedSection({
  duration = 0.6,
  className = "",
 }: AnimatedSectionProps) {
- const { ref, inView } = useInView({
- triggerOnce: true,
- threshold: 0.1,
- rootMargin: "-50px 0px",
- });
+ const ref = useRef<HTMLDivElement>(null);
+ const [isVisible, setIsVisible] = useState(false);
+
+ useEffect(() => {
+ const element = ref.current;
+ if (!element) {
+ return;
+ }
+
+ const observer = new IntersectionObserver(
+ ([entry]) => {
+ if (entry.isIntersecting) {
+ setIsVisible(true);
+ observer.disconnect();
+ }
+ },
+ { threshold: 0.1, rootMargin: "-50px 0px" }
+ );
+
+ observer.observe(element);
+ return () => observer.disconnect();
+ }, []);
+
+ const style = useMemo(
+ () => ({
+ opacity: isVisible ? 1 : 0,
+ transform: isVisible ? "none" : initialTransforms[animation],
+ transitionProperty: "opacity, transform",
+ transitionDuration: `${duration}s`,
+ transitionTimingFunction: "cubic-bezier(0, 0, 0.2, 1)",
+ transitionDelay: `${delay}s`,
+ willChange: "opacity, transform",
+ }),
+ [animation, delay, duration, isVisible]
+ );
 
  return (
- <motion.div
+ <div
  ref={ref}
- initial="hidden"
- animate={inView? "visible" : "hidden"}
- variants={variants[animation]}
- transition={{ duration, delay, ease: "easeOut" }}
+ style={style}
  className={className}
  >
  {children}
- </motion.div>
+ </div>
  );
 }
 

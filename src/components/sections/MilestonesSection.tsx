@@ -1,13 +1,34 @@
 ﻿"use client";
 
 import CountUp from "react-countup";
-import { useInView } from "react-intersection-observer";
+import { useEffect, useRef, useState } from "react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { milestones } from "@/data/content";
 
 export default function MilestonesSection() {
-    const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
+    const ref = useRef<HTMLDivElement>(null);
+    const [inView, setInView] = useState(false);
+
+    useEffect(() => {
+        const element = ref.current;
+        if (!element) {
+            return;
+        }
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setInView(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.3 },
+        );
+
+        observer.observe(element);
+        return () => observer.disconnect();
+    }, []);
 
     return (
         <section className="relative py-[50px] bg-[#E5A2FF0A] overflow-hidden">

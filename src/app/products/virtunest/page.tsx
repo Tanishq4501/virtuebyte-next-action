@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import Image from "next/image";
+import LazyImage from "@/components/ui/LazyImage";
 import { useState } from "react";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -87,14 +87,13 @@ export default function VirtuNestPage() {
  </p>
  </AnimatedSection>
  <AnimatedSection animation="fadeInRight" delay={0.2}>
- <Image
+ <LazyImage
  src="/images/products/virtunest-hero.webp"
  alt="VirtuNest home inspection platform dashboard preview"
  width={800}
  height={534}
  className="w-full h-auto rounded-[20px]"
  priority
- fetchPriority="high"
  sizes="(min-width: 1024px) 50vw, 100vw"
  />
  </AnimatedSection>
@@ -110,7 +109,7 @@ export default function VirtuNestPage() {
  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
  {/* Left: Inspection image */}
  <AnimatedSection animation="fadeInLeft">
- <Image
+ <LazyImage
  src="/images/products/virtunest-inspections.webp"
  alt="VirtuNest interface for managing multiple inspection types"
  width={700}

@@ -1,5 +1,5 @@
 ﻿import { Metadata } from "next";
-import Image from "next/image";
+import LazyImage from "@/components/ui/LazyImage";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import SectionHeading from "@/components/ui/SectionHeading";
 import AnimatedSection from "@/components/ui/AnimatedSection";
@@ -29,7 +29,7 @@ export default function CaseStudiesPage() {
  <div className="relative bg-[#E5A2FF0A] rounded-[20px] overflow-hidden border border-[#E5A2FF0A] hover:shadow-[0px_5px_30px_0px_rgba(0,0,0,0.41)] transition-all duration-300 h-full group hover-bob">
  <div className="absolute inset-0 bg-[radial-gradient(at_top_left,#F6921E_0%,#FFFFFF00_50%)] opacity-20 pointer-events-none rounded-[20px]" />
  <div className="relative h-56 md:h-[274px] overflow-hidden rounded-[20px]">
- <Image
+ <LazyImage
  src={study.image}
  alt={`${study.title} case study cover image`}
  fill

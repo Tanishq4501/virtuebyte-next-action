@@ -1,6 +1,8 @@
 ﻿import { Metadata } from "next";
-import Image from "next/image";
+import LazyImage from "@/components/ui/LazyImage";
 import Breadcrumb from "@/components/ui/Breadcrumb";
+import HeroImagePreload from "@/components/ui/HeroImagePreload";
+import { HERO_IMAGES } from "@/lib/hero-images";
 import SectionHeading from "@/components/ui/SectionHeading";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Link from "next/link";
@@ -118,6 +120,7 @@ const galleryImages = [
 export default function AboutPage() {
     return (
         <>
+            <HeroImagePreload href={HERO_IMAGES.aboutHero} />
             <Breadcrumb items={[{ label: "About Us" }]} />
 
             {/* Hero Section */}
@@ -149,13 +152,12 @@ export default function AboutPage() {
                         <AnimatedSection animation="fadeInRight" delay={0.2} className="h-full">
                             <div className="relative h-full min-h-[320px] rounded-[20px] overflow-hidden">
                                 <div className="absolute inset-0 bg-[radial-gradient(at_center_center,#E5A2FF0A_65%,#FFFFFF00_50%)] opacity-100 pointer-events-none z-10" />
-                                <Image
+                                <LazyImage
                                     src="/images/about/about-hero.webp"
                                     alt="Technology consulting team workspace and modern office environment"
                                     fill
                                     className="object-cover rounded-[20px]"
                                     priority
-                                    fetchPriority="high"
                                     sizes="(min-width: 1024px) 45vw, 100vw"
                                 />
                             </div>
@@ -228,7 +230,7 @@ export default function AboutPage() {
                         <AnimatedSection animation="fadeInLeft">
                             <div className="relative bg-[#E5A2FF0A] rounded-[20px] overflow-hidden border border-[#E5A2FF0A] hover:shadow-[0px_5px_30px_0px_rgba(0,0,0,0.41)] transition-all h-full hover-bob">
                                 <div className="absolute inset-0 bg-[radial-gradient(at_top_left,#F6921E_0%,#FFFFFF00_50%)] opacity-20 pointer-events-none rounded-[20px]" />
-                                <Image
+                                <LazyImage
                                     src="/images/about/vision.webp"
                                     alt="Vision concept for digital transformation and long-term growth"
                                     width={600}
@@ -250,7 +252,7 @@ export default function AboutPage() {
                         <AnimatedSection animation="fadeInRight" delay={0.2}>
                             <div className="relative bg-[#E5A2FF0A] rounded-[20px] overflow-hidden border border-[#E5A2FF0A] hover:shadow-[0px_5px_30px_0px_rgba(0,0,0,0.41)] transition-all h-full hover-bob">
                                 <div className="absolute inset-0 bg-[radial-gradient(at_top_left,#F6921E_0%,#FFFFFF00_50%)] opacity-20 pointer-events-none rounded-[20px]" />
-                                <Image
+                                <LazyImage
                                     src="/images/about/mission.webp"
                                     alt="Mission concept showing strategic implementation and measurable outcomes"
                                     width={600}
@@ -301,7 +303,7 @@ export default function AboutPage() {
                                     <div className="absolute inset-0 bg-[radial-gradient(at_top_left,#F6921E_0%,#FFFFFF00_50%)] opacity-20 pointer-events-none rounded-[18px]" />
 
                                     <div className="relative h-40 md:h-44 overflow-hidden rounded-t-[18px]">
-                                        <Image
+                                        <LazyImage
                                             src={value.image}
                                             alt={`${value.title} core value illustration`}
                                             fill
@@ -504,7 +506,7 @@ export default function AboutPage() {
                                         key={index}
                                         className="relative h-48 rounded-[20px] overflow-hidden group"
                                     >
-                                        <Image
+                                        <LazyImage
                                             src={img}
                                             alt={`Life at VirtueByte ${index + 1}`}
                                             fill
@@ -585,7 +587,7 @@ export default function AboutPage() {
                                 <div className="relative bg-[#E5A2FF0A] rounded-[20px] overflow-hidden border border-[#E5A2FF0A] hover:shadow-[0px_5px_30px_0px_rgba(0,0,0,0.41)] transition-all duration-300 h-full group hover-bob">
                                     <div className="absolute inset-0 bg-[radial-gradient(at_top_left,#F6921E_0%,#FFFFFF00_50%)] opacity-20 pointer-events-none rounded-[20px]" />
                                     <div className="relative h-40 overflow-hidden rounded-t-[20px]">
-                                        <Image
+                                        <LazyImage
                                             src={item.image}
                                             alt={`${item.title} technology partnership illustration`}
                                             fill

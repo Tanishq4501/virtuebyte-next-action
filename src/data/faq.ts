@@ -3,10 +3,13 @@ export interface FAQItem {
   question: string;
   answer: string;
   keywords: string[];
-  pages: string[];
-  intent?: string;
+  pages: string[];   // URL path segments that boost this FAQ; '*' means all pages
+  intent?: string;   // 'pricing' | 'timeline' | 'contact' | 'services' | 'technical' | 'general'
 }
 
+// ---------------------------------------------------------------------------
+// SYNONYM GROUPS — used by the matching engine to expand keyword lookups
+// ---------------------------------------------------------------------------
 export const SYNONYM_GROUPS: string[][] = [
   ["cost", "price", "pricing", "fee", "fees", "rate", "rates", "how much", "budget", "charge", "charges", "expensive", "affordable", "cheap", "investment"],
   ["time", "timeline", "duration", "how long", "deadline", "schedule", "timeframe", "weeks", "months", "days", "when"],
@@ -30,22 +33,39 @@ export const SYNONYM_GROUPS: string[][] = [
   ["train", "training", "learning", "upskill", "teach", "educate"],
 ];
 
+// ---------------------------------------------------------------------------
+// INTENT-LEVEL FALLBACK RESPONSES (used when no FAQ scores high enough)
+// ---------------------------------------------------------------------------
 export const INTENT_FALLBACK_RESPONSES: Record<string, string> = {
-  greeting: "Hello! 👋 Welcome to VirtueByte! I'm here to help you with information about our services, products, and solutions. What would you like to know today?",
-  thanks: "You're welcome! 😊 Is there anything else I can help you with? Feel free to ask about our services, case studies, pricing, or how to get in touch.",
-  pricing: "Our pricing is tailored to your specific project requirements, scope, and team size. We offer flexible models: fixed-price, time & material, and dedicated team retainers. Contact us at sales@virtuebytech.com or call +91-20-677088756 for a personalised quote.",
-  contact: "Here's how to reach us:\n📧 Sales: sales@virtuebytech.com\n📞 Phone: +91-20-677088756\n📧 Careers: careers@virtuebytech.com\n🕒 Hours: Mon–Fri, 9 AM–6 PM IST\n\nYou can also fill out the contact form on our website for a quick response.",
-  timeline: "Project timelines depend on scope and complexity:\n• Proof-of-concept: 4–6 weeks\n• Mid-size implementation: 2–4 months\n• Enterprise-scale deployment: 4–12 months\n\nWe define exact timelines during the initial consultation based on your requirements.",
-  location: "VirtueByte is headquartered at Wanowarie, Pune 411040, Maharashtra, India. We serve clients globally across manufacturing, healthcare, finance, retail, and technology sectors.",
-  services: "VirtueByte specialises in:\n• AI/ML Consulting & Implementation\n• Salesforce CRM Solutions\n• Cloud Services (AWS & Azure)\n• DevOps & CI/CD Automation\n• Data Science & Analytics\n• Offshore Development Centers\n\nWhich service would you like to explore?",
-  fallback: "I can help with questions about VirtueByte's services, products, case studies, pricing, and contact details. Try asking about AI/ML, Salesforce, cloud, DevOps, data analytics, or our offshore teams.",
+  greeting:
+    "Hello! 👋 Welcome to VirtueByte! I'm here to help you with information about our services, products, and solutions. What would you like to know today?",
+  thanks:
+    "You're welcome! 😊 Is there anything else I can help you with? Feel free to ask about our services, case studies, pricing, or how to get in touch.",
+  pricing:
+    "Our pricing is tailored to your specific project requirements, scope, and team size. We offer flexible models: fixed-price, time & material, and dedicated team retainers. Contact us at sales@virtuebytech.com or call +91-20-677088756 for a personalised quote.",
+  contact:
+    "Here's how to reach us:\n📧 Sales: sales@virtuebytech.com\n📞 Phone: +91-20-677088756\n📧 Careers: careers@virtuebytech.com\n🕒 Hours: Mon–Fri, 9 AM–6 PM IST\n\nYou can also fill out the contact form on our website for a quick response.",
+  timeline:
+    "Project timelines depend on scope and complexity:\n• Proof-of-concept: 4–6 weeks\n• Mid-size implementation: 2–4 months\n• Enterprise-scale deployment: 4–12 months\n\nWe define exact timelines during the initial consultation based on your requirements.",
+  location:
+    "VirtueByte is headquartered at Wanowarie, Pune 411040, Maharashtra, India. We serve clients globally across manufacturing, healthcare, finance, retail, and technology sectors.",
+  services:
+    "VirtueByte specialises in:\n• AI/ML Consulting & Implementation\n• Salesforce CRM Solutions\n• Cloud Services (AWS & Azure)\n• DevOps & CI/CD Automation\n• Data Science & Analytics\n• Offshore Development Centers\n\nWhich service would you like to explore?",
+  fallback:
+    "I can help with questions about VirtueByte's services, products, case studies, pricing, and contact details. Try asking about AI/ML, Salesforce, cloud, DevOps, data analytics, or our offshore teams.",
 };
 
+// ---------------------------------------------------------------------------
+// FAQ DATA
+// ---------------------------------------------------------------------------
 export const faqData: FAQItem[] = [
+
+  // ── COMPANY OVERVIEW ──────────────────────────────────────────────────────
   {
     id: "about-virtuebyte",
     question: "Tell me about Virtuebyte",
-    answer: "VirtueByte is an IT consulting and software development company delivering end-to-end technology services: Salesforce CRM implementation, AI/ML solutions, cloud migration, DevOps automation, data analytics, and offshore development teams. Our mission is to help businesses build scalable, efficient, and future-ready technology ecosystems.",
+    answer:
+      "VirtueByte is an IT consulting and software development company delivering end-to-end technology services: Salesforce CRM implementation, AI/ML solutions, cloud migration, DevOps automation, data analytics, and offshore development teams. Our mission is to help businesses build scalable, efficient, and future-ready technology ecosystems.",
     keywords: ["company", "about", "virtuebyte", "overview", "mission", "who are you", "what is virtuebyte", "tell me", "introduction"],
     pages: ["*"],
     intent: "general",
@@ -53,7 +73,8 @@ export const faqData: FAQItem[] = [
   {
     id: "services-overview",
     question: "What services does Virtuebyte offer?",
-    answer: "VirtueByte offers: AI/ML Consulting, Salesforce Implementation, Cloud Services (AWS & Azure), DevOps Automation, Data Science & Analytics, and Offshore Development Centers. Each service is tailored to your business goals and industry requirements.",
+    answer:
+      "VirtueByte offers: AI/ML Consulting, Salesforce Implementation, Cloud Services (AWS & Azure), DevOps Automation, Data Science & Analytics, and Offshore Development Centers. Each service is tailored to your business goals and industry requirements.",
     keywords: ["services", "offer", "provide", "do you do", "specialise", "specialize", "what do you", "capabilities", "expertise"],
     pages: ["*"],
     intent: "services",
@@ -61,7 +82,8 @@ export const faqData: FAQItem[] = [
   {
     id: "industries",
     question: "Which industries does Virtuebyte work with?",
-    answer: "We serve clients across manufacturing, healthcare, finance, retail, and technology. Our solutions are tailored to address industry-specific challenges, compliance requirements, and operational workflows.",
+    answer:
+      "We serve clients across manufacturing, healthcare, finance, retail, and technology. Our solutions are tailored to address industry-specific challenges, compliance requirements, and operational workflows.",
     keywords: ["industries", "sectors", "manufacturing", "healthcare", "finance", "retail", "technology", "clients", "verticals", "domain"],
     pages: ["about", "*"],
     intent: "general",
@@ -69,7 +91,8 @@ export const faqData: FAQItem[] = [
   {
     id: "location",
     question: "Where is Virtuebyte located?",
-    answer: "VirtueByte is headquartered at Wanowarie, Pune 411040, Maharashtra, India. We work with clients globally across North America, Europe, and APAC regions.",
+    answer:
+      "VirtueByte is headquartered at Wanowarie, Pune 411040, Maharashtra, India. We work with clients globally across North America, Europe, and APAC regions.",
     keywords: ["location", "headquarters", "office", "address", "where", "pune", "india", "based"],
     pages: ["about", "contact", "*"],
     intent: "general",
@@ -77,7 +100,8 @@ export const faqData: FAQItem[] = [
   {
     id: "history",
     question: "How long has Virtuebyte been in business?",
-    answer: "VirtueByte has been serving clients since 2020. In that time we've built a reputation for delivering innovative technology solutions and have successfully completed hundreds of projects across manufacturing, healthcare, finance, and technology sectors.",
+    answer:
+      "VirtueByte has been serving clients since 2020. In that time we've built a reputation for delivering innovative technology solutions and have successfully completed hundreds of projects across manufacturing, healthcare, finance, and technology sectors.",
     keywords: ["experience", "years", "established", "history", "founded", "since", "how old", "background"],
     pages: ["about", "*"],
     intent: "general",
@@ -85,7 +109,8 @@ export const faqData: FAQItem[] = [
   {
     id: "why-choose",
     question: "What makes Virtuebyte different from other IT companies?",
-    answer: "VirtueByte combines deep technical expertise with business consulting acumen. We focus on outcome-driven delivery — not just implementing technology, but ensuring it creates measurable ROI. We offer end-to-end support from strategy through post-deployment, work across multiple technology stacks, and provide flexible engagement models to suit startups and enterprises alike.",
+    answer:
+      "VirtueByte combines deep technical expertise with business consulting acumen. We focus on outcome-driven delivery — not just implementing technology, but ensuring it creates measurable ROI. We offer end-to-end support from strategy through post-deployment, work across multiple technology stacks, and provide flexible engagement models to suit startups and enterprises alike.",
     keywords: ["different", "unique", "why choose", "better", "advantage", "stand out", "special", "compared", "versus", "vs", "benefit"],
     pages: ["about", "*"],
     intent: "general",
@@ -93,7 +118,8 @@ export const faqData: FAQItem[] = [
   {
     id: "startups",
     question: "Do you work with startups?",
-    answer: "Yes! We work with both startups and large enterprises. For startups we offer lean, cost-effective engagement models, MVP development, and scalable architecture planning. Our offshore development team model is particularly popular with startups looking to build quality products at scale without large upfront costs.",
+    answer:
+      "Yes! We work with both startups and large enterprises. For startups we offer lean, cost-effective engagement models, MVP development, and scalable architecture planning. Our offshore development team model is particularly popular with startups looking to build quality products at scale without large upfront costs.",
     keywords: ["startup", "small business", "smb", "early stage", "entrepreneur", "new company", "mvp", "small team"],
     pages: ["*"],
     intent: "general",
@@ -101,15 +127,19 @@ export const faqData: FAQItem[] = [
   {
     id: "methodology",
     question: "What development methodology does Virtuebyte follow?",
-    answer: "We follow Agile and Scrum methodologies with two-week sprint cycles, regular demos, and continuous client collaboration. For larger engagements we use a hybrid of Agile and SAFe (Scaled Agile Framework). All our projects include discovery workshops, architecture reviews, iterative development, UAT, and post-launch support.",
+    answer:
+      "We follow Agile and Scrum methodologies with two-week sprint cycles, regular demos, and continuous client collaboration. For larger engagements we use a hybrid of Agile and SAFe (Scaled Agile Framework). All our projects include discovery workshops, architecture reviews, iterative development, UAT, and post-launch support.",
     keywords: ["methodology", "agile", "scrum", "process", "approach", "sprint", "workflow", "framework", "how do you work", "development process"],
     pages: ["*"],
     intent: "general",
   },
+
+  // ── AI / ML ───────────────────────────────────────────────────────────────
   {
     id: "aiml-services",
     question: "What AI/ML services do you offer?",
-    answer: "We provide end-to-end AI/ML services: business process automation using ML models, intelligent chatbots, predictive analytics, NLP-based document processing, computer vision solutions, recommendation engines, and AI-powered decision-making systems. We help automate repetitive tasks, improve accuracy, and scale operations with minimal human intervention.",
+    answer:
+      "We provide end-to-end AI/ML services: business process automation using ML models, intelligent chatbots, predictive analytics, NLP-based document processing, computer vision solutions, recommendation engines, and AI-powered decision-making systems. We help automate repetitive tasks, improve accuracy, and scale operations with minimal human intervention.",
     keywords: ["ai", "ml", "machine learning", "artificial intelligence", "predictive analytics", "nlp", "computer vision", "automation", "chatbot", "neural", "deep learning", "ai services", "intelligent"],
     pages: ["ai-ml"],
     intent: "services",
@@ -117,7 +147,8 @@ export const faqData: FAQItem[] = [
   {
     id: "aiml-cost",
     question: "How much does AI/ML consulting typically cost?",
-    answer: "AI/ML consulting costs vary based on project complexity, data maturity, infrastructure needs, and deployment scope. Small automation projects may start from a few thousand dollars, while enterprise AI platforms are priced on a custom basis. We provide a structured assessment and scoping session before defining budget expectations. Contact sales@virtuebytech.com for a tailored quote.",
+    answer:
+      "AI/ML consulting costs vary based on project complexity, data maturity, infrastructure needs, and deployment scope. Small automation projects may start from a few thousand dollars, while enterprise AI platforms are priced on a custom basis. We provide a structured assessment and scoping session before defining budget expectations. Contact sales@virtuebytech.com for a tailored quote.",
     keywords: ["ai cost", "ml cost", "ai price", "ai pricing", "ml pricing", "how much ai", "ai budget", "machine learning cost", "cost ai", "price ai"],
     pages: ["ai-ml"],
     intent: "pricing",
@@ -125,7 +156,8 @@ export const faqData: FAQItem[] = [
   {
     id: "aiml-tech",
     question: "What AI/ML technologies and platforms do you work with?",
-    answer: "We work with Python (TensorFlow, PyTorch, scikit-learn, Keras, Hugging Face), cloud AI services (AWS SageMaker, Azure Machine Learning, Google Vertex AI), MLflow for experiment tracking, FastAPI/Flask for model serving, and enterprise LLM integrations via OpenAI and Anthropic APIs. We choose the right stack based on your data, scale, and compliance needs.",
+    answer:
+      "We work with Python (TensorFlow, PyTorch, scikit-learn, Keras, Hugging Face), cloud AI services (AWS SageMaker, Azure Machine Learning, Google Vertex AI), MLflow for experiment tracking, FastAPI/Flask for model serving, and enterprise LLM integrations via OpenAI and Anthropic APIs. We choose the right stack based on your data, scale, and compliance needs.",
     keywords: ["ai technology", "ml technology", "tensorflow", "pytorch", "python", "scikit", "keras", "sagemaker", "azure ml", "hugging face", "llm", "openai", "tech stack", "platform", "framework"],
     pages: ["ai-ml"],
     intent: "technical",
@@ -133,7 +165,8 @@ export const faqData: FAQItem[] = [
   {
     id: "aiml-timeline",
     question: "How long does it take to implement an AI solution?",
-    answer: "Timelines vary: a focused automation or chatbot solution takes 6–10 weeks; a predictive analytics model typically 2–3 months; a full enterprise AI platform 4–8 months. This includes discovery, data preparation, model development, testing, and deployment. We can start with a rapid proof-of-concept in 2–4 weeks to validate value before full investment.",
+    answer:
+      "Timelines vary: a focused automation or chatbot solution takes 6–10 weeks; a predictive analytics model typically 2–3 months; a full enterprise AI platform 4–8 months. This includes discovery, data preparation, model development, testing, and deployment. We can start with a rapid proof-of-concept in 2–4 weeks to validate value before full investment.",
     keywords: ["ai timeline", "ml timeline", "ai duration", "how long ai", "ai implementation time", "ai project time", "ai schedule", "poc", "proof of concept"],
     pages: ["ai-ml"],
     intent: "timeline",
@@ -141,7 +174,8 @@ export const faqData: FAQItem[] = [
   {
     id: "aiml-integrate",
     question: "Can AI/ML solutions integrate with our existing systems?",
-    answer: "Yes. Modern AI solutions integrate seamlessly via REST APIs, webhooks, and SDKs with CRMs (Salesforce), ERPs (SAP, Oracle), cloud platforms (AWS, Azure), databases, and data warehouses. We design integrations to run alongside your existing workflows with zero disruption to live operations.",
+    answer:
+      "Yes. Modern AI solutions integrate seamlessly via REST APIs, webhooks, and SDKs with CRMs (Salesforce), ERPs (SAP, Oracle), cloud platforms (AWS, Azure), databases, and data warehouses. We design integrations to run alongside your existing workflows with zero disruption to live operations.",
     keywords: ["ai integration", "ml integration", "existing systems", "api", "erp", "crm", "connect ai", "compatibility", "existing software", "legacy"],
     pages: ["ai-ml"],
     intent: "technical",
@@ -149,15 +183,19 @@ export const faqData: FAQItem[] = [
   {
     id: "aiml-outcomes",
     question: "What business outcomes can AI/ML deliver?",
-    answer: "Clients typically see: 30–60% reduction in manual processing time, improved forecast accuracy (often 15–25% uplift), reduced operational costs, better customer experience through personalisation, faster decision-making, and measurable ROI within 6–12 months of deployment. We always define outcome KPIs before project kick-off.",
+    answer:
+      "Clients typically see: 30–60% reduction in manual processing time, improved forecast accuracy (often 15–25% uplift), reduced operational costs, better customer experience through personalisation, faster decision-making, and measurable ROI within 6–12 months of deployment. We always define outcome KPIs before project kick-off.",
     keywords: ["ai outcomes", "ai results", "ai roi", "ml benefits", "ai benefits", "business value", "return on investment", "kpi", "impact", "ai advantage"],
     pages: ["ai-ml"],
     intent: "general",
   },
+
+  // ── SALESFORCE ────────────────────────────────────────────────────────────
   {
     id: "salesforce-services",
     question: "How can you help with Salesforce?",
-    answer: "We provide full-cycle Salesforce services: CRM setup and configuration, Sales Cloud and Service Cloud implementation, custom object and workflow development, AppExchange integrations, data migration, Apex/LWC development, reporting and dashboards, and ongoing managed support.",
+    answer:
+      "We provide full-cycle Salesforce services: CRM setup and configuration, Sales Cloud and Service Cloud implementation, custom object and workflow development, AppExchange integrations, data migration, Apex/LWC development, reporting and dashboards, and ongoing managed support.",
     keywords: ["salesforce", "crm", "implementation", "consulting", "sales cloud", "service cloud", "custom", "apex", "lwc", "lightning", "data migration"],
     pages: ["salesforce"],
     intent: "services",
@@ -165,7 +203,8 @@ export const faqData: FAQItem[] = [
   {
     id: "salesforce-implementation",
     question: "What is included in your Salesforce implementation services?",
-    answer: "Our Salesforce implementation includes: business requirements gathering, org setup and configuration, user role hierarchy, custom objects and fields, workflow rules and process builder, email templates, reports and dashboards, data migration from legacy systems, user training, and a 30-day post go-live hypercare period.",
+    answer:
+      "Our Salesforce implementation includes: business requirements gathering, org setup and configuration, user role hierarchy, custom objects and fields, workflow rules and process builder, email templates, reports and dashboards, data migration from legacy systems, user training, and a 30-day post go-live hypercare period.",
     keywords: ["salesforce implementation", "crm setup", "configuration", "custom objects", "workflow", "reports", "dashboards", "data migration", "user training", "go live"],
     pages: ["salesforce"],
     intent: "services",
@@ -173,7 +212,8 @@ export const faqData: FAQItem[] = [
   {
     id: "salesforce-customize",
     question: "Can Salesforce be customized for our business workflows?",
-    answer: "Absolutely. We build custom Salesforce solutions using Apex classes, triggers, Lightning Web Components, and Flow automation tailored to your exact business processes. From complex approval workflows to custom portals and third-party integrations, Salesforce can be shaped to mirror your operations precisely.",
+    answer:
+      "Absolutely. We build custom Salesforce solutions using Apex classes, triggers, Lightning Web Components, and Flow automation tailored to your exact business processes. From complex approval workflows to custom portals and third-party integrations, Salesforce can be shaped to mirror your operations precisely.",
     keywords: ["salesforce customization", "custom workflow", "apex", "lwc", "flow", "process builder", "tailored", "business specific", "bespoke", "customise", "customize"],
     pages: ["salesforce"],
     intent: "services",
@@ -181,7 +221,8 @@ export const faqData: FAQItem[] = [
   {
     id: "salesforce-appexchange",
     question: "Do you support AppExchange integrations and custom development?",
-    answer: "Yes. We implement AppExchange products, build custom Lightning components, and integrate Salesforce with external systems via MuleSoft, REST APIs, and third-party middleware. We have experience integrating Salesforce with ERP systems, marketing platforms, payment gateways, and custom databases.",
+    answer:
+      "Yes. We implement AppExchange products, build custom Lightning components, and integrate Salesforce with external systems via MuleSoft, REST APIs, and third-party middleware. We have experience integrating Salesforce with ERP systems, marketing platforms, payment gateways, and custom databases.",
     keywords: ["appexchange", "integration", "mulesoft", "api", "third party", "external system", "custom development", "middleware", "erp integration"],
     pages: ["salesforce"],
     intent: "technical",
@@ -189,7 +230,8 @@ export const faqData: FAQItem[] = [
   {
     id: "salesforce-support",
     question: "Do you provide post-implementation Salesforce support?",
-    answer: "Yes. We offer tiered managed support plans covering system monitoring, bug fixes, feature enhancements, user support, quarterly health checks, and proactive performance optimisation. Our support team ensures your Salesforce org evolves with your business needs.",
+    answer:
+      "Yes. We offer tiered managed support plans covering system monitoring, bug fixes, feature enhancements, user support, quarterly health checks, and proactive performance optimisation. Our support team ensures your Salesforce org evolves with your business needs.",
     keywords: ["salesforce support", "post implementation", "managed support", "maintenance", "bug fix", "ongoing", "after go live", "support plan", "monitor"],
     pages: ["salesforce"],
     intent: "services",
@@ -197,15 +239,19 @@ export const faqData: FAQItem[] = [
   {
     id: "salesforce-adoption",
     question: "How do you drive user adoption during Salesforce implementation?",
-    answer: "We embed adoption strategy into every implementation: intuitive UI configuration aligned with user daily tasks, role-based training sessions, video tutorials, quick-reference guides, a sandbox environment for practice, and a change management plan that aligns leadership and end users from day one.",
+    answer:
+      "We embed adoption strategy into every implementation: intuitive UI configuration aligned with user daily tasks, role-based training sessions, video tutorials, quick-reference guides, a sandbox environment for practice, and a change management plan that aligns leadership and end users from day one.",
     keywords: ["user adoption", "training", "change management", "onboarding", "learning", "teach users", "salesforce training", "user acceptance"],
     pages: ["salesforce"],
     intent: "general",
   },
+
+  // ── CLOUD ─────────────────────────────────────────────────────────────────
   {
     id: "cloud-services",
     question: "What cloud services do you provide?",
-    answer: "We provide cloud consulting, migration, and managed services across AWS and Microsoft Azure: cloud strategy and architecture, lift-and-shift and re-platform migrations, multi-cloud management, Kubernetes container orchestration, serverless architectures, cloud cost optimisation, and 24/7 infrastructure monitoring.",
+    answer:
+      "We provide cloud consulting, migration, and managed services across AWS and Microsoft Azure: cloud strategy and architecture, lift-and-shift and re-platform migrations, multi-cloud management, Kubernetes container orchestration, serverless architectures, cloud cost optimisation, and 24/7 infrastructure monitoring.",
     keywords: ["cloud services", "aws", "azure", "cloud consulting", "cloud migration", "cloud architecture", "kubernetes", "container", "serverless", "cloud management"],
     pages: ["cloud"],
     intent: "services",
@@ -213,7 +259,8 @@ export const faqData: FAQItem[] = [
   {
     id: "cloud-consulting",
     question: "What does your cloud consulting service include?",
-    answer: "Our cloud consulting covers: cloud readiness assessment, total cost of ownership (TCO) analysis, cloud architecture design, security and compliance framework setup, migration planning and execution, DevOps toolchain integration, and post-migration optimisation. We deliver a cloud environment that is secure, scalable, and cost-efficient.",
+    answer:
+      "Our cloud consulting covers: cloud readiness assessment, total cost of ownership (TCO) analysis, cloud architecture design, security and compliance framework setup, migration planning and execution, DevOps toolchain integration, and post-migration optimisation. We deliver a cloud environment that is secure, scalable, and cost-efficient.",
     keywords: ["cloud consulting", "cloud assessment", "tco", "cloud architecture", "cloud readiness", "cloud security", "cloud compliance", "cloud planning"],
     pages: ["cloud"],
     intent: "services",
@@ -221,7 +268,8 @@ export const faqData: FAQItem[] = [
   {
     id: "cloud-cost",
     question: "How much does cloud migration typically cost?",
-    answer: "Cloud migration costs depend on infrastructure size, number of applications, compliance requirements, and migration strategy (lift-and-shift vs re-architecture). Small migrations may range from $10K–$50K; enterprise migrations are scoped individually. We provide a detailed TCO analysis and migration estimate at no cost during the initial consultation.",
+    answer:
+      "Cloud migration costs depend on infrastructure size, number of applications, compliance requirements, and migration strategy (lift-and-shift vs re-architecture). Small migrations may range from $10K–$50K; enterprise migrations are scoped individually. We provide a detailed TCO analysis and migration estimate at no cost during the initial consultation.",
     keywords: ["cloud migration cost", "cloud price", "how much cloud", "cloud budget", "migration pricing", "cloud fee", "migration cost"],
     pages: ["cloud"],
     intent: "pricing",
@@ -229,7 +277,8 @@ export const faqData: FAQItem[] = [
   {
     id: "cloud-timeline",
     question: "How long does a cloud migration project take?",
-    answer: "Timelines vary: small application migrations complete in 4–8 weeks; mid-size infrastructure migrations take 2–4 months; full enterprise cloud transformation programmes run 6–12+ months. We use a phased migration approach to minimise risk and disruption to live systems.",
+    answer:
+      "Timelines vary: small application migrations complete in 4–8 weeks; mid-size infrastructure migrations take 2–4 months; full enterprise cloud transformation programmes run 6–12+ months. We use a phased migration approach to minimise risk and disruption to live systems.",
     keywords: ["cloud migration timeline", "cloud duration", "how long cloud", "migration time", "cloud project length", "cloud schedule"],
     pages: ["cloud"],
     intent: "timeline",
@@ -237,7 +286,8 @@ export const faqData: FAQItem[] = [
   {
     id: "cloud-platforms",
     question: "Which cloud platforms do you support?",
-    answer: "We are experienced with AWS (EC2, S3, Lambda, RDS, EKS, CloudFormation) and Microsoft Azure (AKS, Azure Functions, Cosmos DB, ARM Templates, Azure DevOps). We also support multi-cloud and hybrid cloud architectures and container orchestration with Kubernetes and Docker.",
+    answer:
+      "We are experienced with AWS (EC2, S3, Lambda, RDS, EKS, CloudFormation) and Microsoft Azure (AKS, Azure Functions, Cosmos DB, ARM Templates, Azure DevOps). We also support multi-cloud and hybrid cloud architectures and container orchestration with Kubernetes and Docker.",
     keywords: ["cloud platforms", "aws", "azure", "google cloud", "ec2", "s3", "lambda", "aks", "eks", "kubernetes", "docker", "hybrid cloud", "multi cloud"],
     pages: ["cloud"],
     intent: "technical",
@@ -245,15 +295,19 @@ export const faqData: FAQItem[] = [
   {
     id: "cloud-security",
     question: "How do you ensure security and compliance during migration?",
-    answer: "We apply a security-first approach: encryption in transit and at rest, identity and access management (IAM), network segmentation, compliance frameworks (GDPR, HIPAA, SOC 2), automated vulnerability scanning, continuous monitoring with CloudWatch/Azure Monitor, and governance policies enforced via Infrastructure as Code.",
+    answer:
+      "We apply a security-first approach: encryption in transit and at rest, identity and access management (IAM), network segmentation, compliance frameworks (GDPR, HIPAA, SOC 2), automated vulnerability scanning, continuous monitoring with CloudWatch/Azure Monitor, and governance policies enforced via Infrastructure as Code.",
     keywords: ["cloud security", "compliance", "encryption", "iam", "gdpr", "hipaa", "soc2", "vulnerability", "monitoring", "governance", "secure migration"],
     pages: ["cloud"],
     intent: "technical",
   },
+
+  // ── DEVOPS ────────────────────────────────────────────────────────────────
   {
     id: "devops-services",
     question: "What DevOps services do you provide?",
-    answer: "We offer end-to-end DevOps consulting: CI/CD pipeline design and implementation, infrastructure as code (Terraform, Ansible), container orchestration (Docker, Kubernetes), cloud-native DevOps on AWS/Azure, automated testing integration, monitoring and observability setup (Prometheus, Grafana, ELK), and DevSecOps implementation.",
+    answer:
+      "We offer end-to-end DevOps consulting: CI/CD pipeline design and implementation, infrastructure as code (Terraform, Ansible), container orchestration (Docker, Kubernetes), cloud-native DevOps on AWS/Azure, automated testing integration, monitoring and observability setup (Prometheus, Grafana, ELK), and DevSecOps implementation.",
     keywords: ["devops", "ci/cd", "pipeline", "terraform", "ansible", "docker", "kubernetes", "infrastructure as code", "automation", "monitoring", "devops services", "continuous integration", "continuous deployment"],
     pages: ["devops"],
     intent: "services",
@@ -261,23 +315,46 @@ export const faqData: FAQItem[] = [
   {
     id: "devops-cicd",
     question: "How do you implement CI/CD pipelines?",
-    answer: "We design and implement CI/CD pipelines using GitHub Actions, GitLab CI, Jenkins, or Azure DevOps. A typical pipeline includes: automated build triggers, unit/integration testing, static code analysis (SonarQube), container image builds, staging environment deployment, smoke tests, and production rollout with rollback capability — typically completed in 3–5 weeks.",
+    answer:
+      "We design and implement CI/CD pipelines using GitHub Actions, GitLab CI, Jenkins, or Azure DevOps. A typical pipeline includes: automated build triggers, unit/integration testing, static code analysis (SonarQube), container image builds, staging environment deployment, smoke tests, and production rollout with rollback capability — typically completed in 3–5 weeks.",
     keywords: ["ci/cd", "pipeline", "github actions", "gitlab", "jenkins", "azure devops", "continuous integration", "continuous deployment", "automated testing", "cicd setup"],
+    pages: ["devops"],
+    intent: "technical",
+  },
+  {
+    id: "devops-iac",
+    question: "What is infrastructure as code and do you support it?",
+    answer:
+      "Infrastructure as Code (IaC) means managing and provisioning cloud infrastructure using code files rather than manual processes. We implement IaC using Terraform and Ansible, enabling repeatable, version-controlled, and auditable infrastructure deployments. This eliminates configuration drift and accelerates environment provisioning from days to minutes.",
+    keywords: ["infrastructure as code", "iac", "terraform", "ansible", "cloudformation", "bicep", "version control", "provisioning", "configuration management"],
+    pages: ["devops"],
+    intent: "technical",
+  },
+  {
+    id: "devops-monitoring",
+    question: "What monitoring and observability solutions do you set up?",
+    answer:
+      "We set up comprehensive observability stacks covering metrics (Prometheus + Grafana), logs (ELK Stack or Loki), distributed tracing (Jaeger, Zipkin), and alerting (PagerDuty, OpsGenie). On cloud-native stacks we leverage CloudWatch, Azure Monitor, and Datadog. Our goal is full visibility into your system health before issues affect users.",
+    keywords: ["monitoring", "observability", "prometheus", "grafana", "elk", "logs", "alerting", "datadog", "cloudwatch", "azure monitor", "tracing", "metrics"],
     pages: ["devops"],
     intent: "technical",
   },
   {
     id: "devops-cost",
     question: "How much does DevOps consulting cost?",
-    answer: "DevOps consulting is typically scoped per engagement: CI/CD setup projects range from $5K–$20K; full DevOps transformation programmes for enterprises are priced on a custom basis. We also offer ongoing DevOps-as-a-service retainer plans. Contact sales@virtuebytech.com for a scoping call.",
+    answer:
+      "DevOps consulting is typically scoped per engagement: CI/CD setup projects range from $5K–$20K; full DevOps transformation programmes for enterprises are priced on a custom basis. We also offer ongoing DevOps-as-a-service retainer plans. Contact sales@virtuebytech.com for a scoping call.",
     keywords: ["devops cost", "devops price", "ci/cd cost", "devops pricing", "how much devops", "devops budget"],
     pages: ["devops"],
     intent: "pricing",
   },
+
+  // ── OFFSHORE / ODC ────────────────────────────────────────────────────────
   {
     id: "offshore-what",
     question: "Do you offer offshore development teams?",
-    answer: "Yes. We set up dedicated Offshore Development Centers (ODCs) — fully managed teams of developers, QA engineers, DevOps specialists, and architects working exclusively on your projects. Our ODC teams operate in your time zone, follow your processes, and integrate seamlessly with your in-house team.",
+    answer:
+      "Yes. We set up dedicated Offshore Development Centers (ODCs) — fully managed teams of developers, QA engineers, DevOps specialists, and architects working exclusively on your projects. Our ODC teams operate in your time zone, follow your processes, and integrate seamlessly with your in-house team.",
     keywords: ["offshore", "dedicated team", "remote team", "odc", "development team", "outsource", "offshore development", "dedicated developers", "virtual team"],
     pages: ["offshore"],
     intent: "services",
@@ -285,7 +362,8 @@ export const faqData: FAQItem[] = [
   {
     id: "odc-what",
     question: "What is an Offshore Development Center (ODC)?",
-    answer: "An ODC is a dedicated remote team that works exclusively on your projects — functioning as an extension of your in-house team. VirtueByte ODCs include recruitment, HR, infrastructure, project management, and compliance, so you get a fully operational tech team without the overhead of building one from scratch.",
+    answer:
+      "An ODC is a dedicated remote team that works exclusively on your projects — functioning as an extension of your in-house team. VirtueByte ODCs include recruitment, HR, infrastructure, project management, and compliance, so you get a fully operational tech team without the overhead of building one from scratch.",
     keywords: ["odc", "offshore development center", "dedicated team", "remote team", "what is odc", "offshore model"],
     pages: ["offshore"],
     intent: "general",
@@ -293,7 +371,8 @@ export const faqData: FAQItem[] = [
   {
     id: "offshore-cost",
     question: "How much does it cost to set up a dedicated offshore team?",
-    answer: "ODC pricing depends on team size, skill sets, and engagement duration. We offer hourly, monthly retainer, and fixed-project pricing models. Typically, an offshore engineer in India costs 60–70% less than an equivalent resource in the US or Europe without compromising quality. Contact us for a detailed cost comparison.",
+    answer:
+      "ODC pricing depends on team size, skill sets, and engagement duration. We offer hourly, monthly retainer, and fixed-project pricing models. Typically, an offshore engineer in India costs 60–70% less than an equivalent resource in the US or Europe without compromising quality. Contact us for a detailed cost comparison.",
     keywords: ["offshore cost", "odc cost", "offshore price", "dedicated team cost", "remote team price", "outsourcing cost", "offshore pricing"],
     pages: ["offshore"],
     intent: "pricing",
@@ -301,7 +380,8 @@ export const faqData: FAQItem[] = [
   {
     id: "offshore-security",
     question: "How do you ensure data security and IP protection?",
-    answer: "We enforce strict security protocols: NDAs and IP assignment agreements from day one, secure VPN-based access controls, code stored in client-owned repositories, no data stored on personal devices, ISO 27001-aligned information security practices, and regular third-party security audits.",
+    answer:
+      "We enforce strict security protocols: NDAs and IP assignment agreements from day one, secure VPN-based access controls, code stored in client-owned repositories, no data stored on personal devices, ISO 27001-aligned information security practices, and regular third-party security audits.",
     keywords: ["data security", "ip protection", "nda", "intellectual property", "secure", "privacy", "offshore security", "ip rights", "code ownership"],
     pages: ["offshore"],
     intent: "technical",
@@ -309,7 +389,8 @@ export const faqData: FAQItem[] = [
   {
     id: "offshore-models",
     question: "What engagement models do you offer for offshore teams?",
-    answer: "We offer three models: (1) Dedicated Team — a fixed team working full-time on your project; (2) Project-Based — we handle delivery end-to-end at a fixed price; (3) Staff Augmentation — add specific skill sets to your existing team on demand. We recommend the best fit based on your budget, timeline, and project complexity.",
+    answer:
+      "We offer three models: (1) Dedicated Team — a fixed team working full-time on your project; (2) Project-Based — we handle delivery end-to-end at a fixed price; (3) Staff Augmentation — add specific skill sets to your existing team on demand. We recommend the best fit based on your budget, timeline, and project complexity.",
     keywords: ["engagement model", "dedicated team", "fixed price", "staff augmentation", "time and material", "outsourcing model", "project based", "hiring model"],
     pages: ["offshore"],
     intent: "general",
@@ -317,15 +398,19 @@ export const faqData: FAQItem[] = [
   {
     id: "offshore-deploy",
     question: "How quickly can you deploy a dedicated development team?",
-    answer: "We can deploy a dedicated development team within 4–6 weeks after finalising requirements, agreements, and onboarding. For staff augmentation of individual contributors, deployment can happen in 1–2 weeks. We maintain a talent pipeline so shortlisted candidates are available quickly.",
+    answer:
+      "We can deploy a dedicated development team within 4–6 weeks after finalising requirements, agreements, and onboarding. For staff augmentation of individual contributors, deployment can happen in 1–2 weeks. We maintain a talent pipeline so shortlisted candidates are available quickly.",
     keywords: ["offshore deploy", "team deployment", "how fast", "how quickly", "onboard team", "team setup time", "start offshore"],
     pages: ["offshore"],
     intent: "timeline",
   },
+
+  // ── DATA SCIENCE & ANALYTICS ──────────────────────────────────────────────
   {
     id: "data-services",
     question: "How can you help with data analytics?",
-    answer: "We provide end-to-end data analytics services: data strategy and architecture, data pipeline engineering, business intelligence dashboard development, predictive and prescriptive analytics, data quality and governance frameworks, and self-service analytics enablement for non-technical users.",
+    answer:
+      "We provide end-to-end data analytics services: data strategy and architecture, data pipeline engineering, business intelligence dashboard development, predictive and prescriptive analytics, data quality and governance frameworks, and self-service analytics enablement for non-technical users.",
     keywords: ["data analytics", "business intelligence", "bi", "dashboard", "reporting", "data strategy", "predictive analytics", "data pipeline", "data engineering"],
     pages: ["data-science"],
     intent: "services",
@@ -333,7 +418,8 @@ export const faqData: FAQItem[] = [
   {
     id: "data-cost",
     question: "What does data analytics consulting typically cost?",
-    answer: "Costs depend on scope, data complexity, and tooling. A focused dashboard or BI implementation may range from $8K–$25K; a full data platform build with ML capabilities is scoped individually. We offer a free initial data assessment to define scope and costs accurately before any commitment.",
+    answer:
+      "Costs depend on scope, data complexity, and tooling. A focused dashboard or BI implementation may range from $8K–$25K; a full data platform build with ML capabilities is scoped individually. We offer a free initial data assessment to define scope and costs accurately before any commitment.",
     keywords: ["data analytics cost", "bi cost", "analytics pricing", "dashboard cost", "data consulting price", "how much data analytics"],
     pages: ["data-science"],
     intent: "pricing",
@@ -341,7 +427,8 @@ export const faqData: FAQItem[] = [
   {
     id: "data-tools",
     question: "Which analytics tools and technologies do you use?",
-    answer: "We work with: Power BI, Tableau, and Looker for visualisation; Python (Pandas, NumPy, Spark) for data processing; AWS (Redshift, Glue, Athena) and Azure (Synapse, Databricks) for cloud data platforms; dbt for data transformation; and Airflow for pipeline orchestration. Tool choice is driven by your existing stack and team capabilities.",
+    answer:
+      "We work with: Power BI, Tableau, and Looker for visualisation; Python (Pandas, NumPy, Spark) for data processing; AWS (Redshift, Glue, Athena) and Azure (Synapse, Databricks) for cloud data platforms; dbt for data transformation; and Airflow for pipeline orchestration. Tool choice is driven by your existing stack and team capabilities.",
     keywords: ["power bi", "tableau", "looker", "python", "spark", "redshift", "synapse", "databricks", "dbt", "airflow", "analytics tools", "bi tools"],
     pages: ["data-science"],
     intent: "technical",
@@ -349,39 +436,178 @@ export const faqData: FAQItem[] = [
   {
     id: "data-timeline",
     question: "How long does a data analytics implementation take?",
-    answer: "A standalone dashboard or BI report can be delivered in 2–4 weeks. A full data warehouse build takes 6–12 weeks. An end-to-end data platform with ML pipelines and self-service analytics typically runs 3–6 months. We phase delivery so you see value quickly, not just at project end.",
+    answer:
+      "A standalone dashboard or BI report can be delivered in 2–4 weeks. A full data warehouse build takes 6–12 weeks. An end-to-end data platform with ML pipelines and self-service analytics typically runs 3–6 months. We phase delivery so you see value quickly, not just at project end.",
     keywords: ["data analytics timeline", "bi timeline", "dashboard timeline", "data project time", "analytics duration"],
     pages: ["data-science"],
     intent: "timeline",
   },
   {
+    id: "data-insights",
+    question: "What business insights can data analytics provide?",
+    answer:
+      "Data analytics surfaces insights across all business functions: customer segmentation and churn prediction, sales forecasting, supply chain optimisation, operational efficiency benchmarks, financial anomaly detection, product performance analysis, and real-time KPI monitoring. We define the insight roadmap based on your specific business questions.",
+    keywords: ["business insights", "data insights", "churn prediction", "sales forecast", "supply chain", "kpi", "analytics value", "data benefits"],
+    pages: ["data-science"],
+    intent: "general",
+  },
+  {
+    id: "data-quality",
+    question: "How do you ensure data quality and security?",
+    answer:
+      "We implement data governance frameworks covering: data cataloguing, lineage tracking, quality validation rules (completeness, accuracy, consistency), role-based access controls, encryption at rest and in transit, compliance with GDPR/HIPAA where applicable, and automated data quality monitoring with alerting.",
+    keywords: ["data quality", "data governance", "data security", "data compliance", "data validation", "gdpr data", "hipaa data", "data privacy"],
+    pages: ["data-science"],
+    intent: "technical",
+  },
+
+  // ── PRODUCTS ──────────────────────────────────────────────────────────────
+  {
     id: "products-overview",
     question: "What products and solutions do you offer?",
-    answer: "VirtueByte has two flagship products: VirtuElite — an AI-powered business analytics platform — and VirtuNest — a cloud infrastructure management suite. Both are cloud-native, enterprise-ready, and can be customised to your specific requirements. We also build bespoke software products for clients.",
+    answer:
+      "VirtueByte has two flagship products: VirtuElite — an AI-powered business analytics platform — and VirtuNest — a cloud infrastructure management suite. Both are cloud-native, enterprise-ready, and can be customised to your specific requirements. We also build bespoke software products for clients.",
     keywords: ["products", "solutions", "virtuelite", "virtunest", "platform", "software product", "what products"],
     pages: ["products"],
     intent: "services",
   },
   {
+    id: "virtuelite",
+    question: "Can you tell me more about VirtuElite?",
+    answer:
+      "VirtuElite is our AI-powered analytics and business intelligence platform. It connects to your data sources, runs predictive models, and surfaces actionable insights through intuitive dashboards. Key features: automated anomaly detection, forecasting, natural language querying, role-based reporting, and integration with Salesforce, ERPs, and cloud databases.",
+    keywords: ["virtuelite", "elite", "analytics platform", "bi platform", "ai platform", "business intelligence product"],
+    pages: ["products"],
+    intent: "services",
+  },
+  {
+    id: "virtunest",
+    question: "What is VirtuNest?",
+    answer:
+      "VirtuNest is our cloud infrastructure management platform. It provides a unified view across AWS and Azure environments, real-time cost monitoring and optimisation recommendations, automated scaling policies, security posture management, and one-click compliance reporting. It reduces cloud spend by an average of 20–35%.",
+    keywords: ["virtunest", "nest", "cloud management", "cloud platform", "infrastructure management", "cloud cost", "cloud monitoring"],
+    pages: ["products"],
+    intent: "services",
+  },
+  {
+    id: "custom-software",
+    question: "Do you build custom software products?",
+    answer:
+      "Yes. We build custom web applications, mobile apps, enterprise platforms, and SaaS products end-to-end. Our stack includes React/Next.js, Node.js, Python, Spring Boot, and cloud-native architectures. We handle product design, development, QA, DevOps, and ongoing maintenance.",
+    keywords: ["custom software", "custom development", "web application", "mobile app", "saas", "bespoke software", "custom product", "software development"],
+    pages: ["products", "*"],
+    intent: "services",
+  },
+  {
+    id: "cloud-based-products",
+    question: "Are your solutions cloud-based?",
+    answer:
+      "Yes. All VirtueByte products and solutions are cloud-native by design, built for scalability, high availability, and security. They deploy on AWS, Azure, or private cloud, with options for hybrid deployments. You retain full data ownership and control.",
+    keywords: ["cloud based", "cloud native", "saas", "hosted", "cloud product", "cloud solution", "cloud deployment"],
+    pages: ["products"],
+    intent: "general",
+  },
+
+  // ── CASE STUDIES ─────────────────────────────────────────────────────────
+  {
     id: "case-studies",
     question: "Can I see your case studies?",
-    answer: "Yes! We have detailed case studies across manufacturing, healthcare, finance, and technology. Visit virtuebytech.com/case-studies to explore how we've helped clients achieve measurable outcomes through AI, cloud migration, Salesforce implementation, and data analytics.",
+    answer:
+      "Yes! We have detailed case studies across manufacturing, healthcare, finance, and technology. Visit virtuebytech.com/case-studies to explore how we've helped clients achieve measurable outcomes through AI, cloud migration, Salesforce implementation, and data analytics.",
     keywords: ["case studies", "examples", "projects", "success stories", "portfolio", "clients", "references", "past work", "results"],
     pages: ["case-studies", "*"],
     intent: "general",
   },
   {
+    id: "case-manufacturing",
+    question: "Do you have case studies in manufacturing?",
+    answer:
+      "Yes. In manufacturing, we've implemented AI for predictive maintenance (reducing unplanned downtime by 40%), supply chain demand forecasting, IoT data pipelines for real-time production monitoring, and Salesforce CRM for distributor management. Ask us for a specific case study document.",
+    keywords: ["manufacturing", "case study", "predictive maintenance", "supply chain", "iot", "production", "factory"],
+    pages: ["case-studies"],
+    intent: "general",
+  },
+  {
+    id: "case-healthcare",
+    question: "Do you have examples in healthcare?",
+    answer:
+      "In healthcare, we've built HIPAA-compliant data platforms, patient outcome analytics dashboards, AI-driven diagnostic support tools, and secure cloud migrations. We understand the strict compliance and data sensitivity requirements in healthcare and design all solutions accordingly.",
+    keywords: ["healthcare", "hospital", "medical", "hipaa", "patient", "health data", "clinical", "healthcare case study"],
+    pages: ["case-studies"],
+    intent: "general",
+  },
+  {
+    id: "case-finance",
+    question: "Can you share finance or fintech project experience?",
+    answer:
+      "Our finance projects include ML-based fraud detection systems, automated regulatory reporting, real-time risk dashboards, secure cloud infrastructure for financial data, and Salesforce CRM customisation for wealth management firms. We are familiar with financial compliance requirements including SOC 2 and PCI-DSS.",
+    keywords: ["finance", "fintech", "fraud detection", "regulatory", "banking", "financial services", "wealth management", "pci"],
+    pages: ["case-studies"],
+    intent: "general",
+  },
+  {
+    id: "case-technology",
+    question: "Do you have success stories in the technology sector?",
+    answer:
+      "Yes. For technology companies we've built SaaS platforms, implemented enterprise DevOps transformations, developed custom AI features (recommendation engines, NLP), and optimised cloud infrastructure to reduce costs by 30%+. We're comfortable working in fast-paced, high-scale engineering environments.",
+    keywords: ["technology", "tech company", "saas", "software company", "startup", "tech case study", "engineering"],
+    pages: ["case-studies"],
+    intent: "general",
+  },
+
+  // ── BLOG ──────────────────────────────────────────────────────────────────
+  {
     id: "blogs",
     question: "Do you have blogs or insights?",
-    answer: "Yes. Our blog at virtuebytech.com/blog covers AI/ML trends, Salesforce best practices, cloud computing guides, DevOps tutorials, and data analytics insights. We publish new content regularly to help businesses stay ahead of the technology curve.",
+    answer:
+      "Yes. Our blog at virtuebytech.com/blog covers AI/ML trends, Salesforce best practices, cloud computing guides, DevOps tutorials, and data analytics insights. We publish new content regularly to help businesses stay ahead of the technology curve.",
     keywords: ["blog", "articles", "insights", "content", "tutorials", "guides", "resources", "learning", "knowledge"],
     pages: ["blog", "*"],
     intent: "general",
   },
   {
+    id: "blog-ai",
+    question: "Do you have blogs on the latest AI trends?",
+    answer:
+      "Yes. We publish articles on generative AI, LLMs, MLOps, AI ethics, responsible AI, NLP advancements, and practical AI implementation guides. Check our AI category at virtuebytech.com/blog for the latest content.",
+    keywords: ["ai blog", "ai articles", "ai trends", "llm", "generative ai", "ai content", "machine learning blog"],
+    pages: ["blog"],
+    intent: "general",
+  },
+  {
+    id: "blog-salesforce",
+    question: "Do you publish Salesforce tips and updates?",
+    answer:
+      "Our Salesforce blog covers release updates, Flow and Apex tips, integration guides, AppExchange reviews, and CRM adoption best practices. We help Salesforce admins and developers stay current with the rapidly evolving platform.",
+    keywords: ["salesforce blog", "salesforce tips", "salesforce update", "salesforce content", "crm blog"],
+    pages: ["blog"],
+    intent: "general",
+  },
+  {
+    id: "blog-cloud",
+    question: "Do you share cloud computing insights?",
+    answer:
+      "Yes. Our cloud content covers AWS and Azure feature updates, cost optimisation strategies, migration guides, Kubernetes tutorials, and cloud security best practices. Practical and hands-on — written by engineers who have done it.",
+    keywords: ["cloud blog", "cloud insights", "aws blog", "azure blog", "cloud content", "cloud tips"],
+    pages: ["blog"],
+    intent: "general",
+  },
+  {
+    id: "blog-devops",
+    question: "Do you have content on DevOps best practices?",
+    answer:
+      "Our DevOps blog includes CI/CD pipeline guides, Terraform tutorials, GitOps practices, container security, monitoring setup walkthroughs, and SRE principles. Useful for both engineers setting up DevOps from scratch and teams looking to level up their existing practices.",
+    keywords: ["devops blog", "devops tips", "devops content", "cicd blog", "terraform tutorial", "kubernetes blog"],
+    pages: ["blog"],
+    intent: "general",
+  },
+
+  // ── CONTACT ───────────────────────────────────────────────────────────────
+  {
     id: "contact",
     question: "How can I contact your team?",
-    answer: "📧 Sales inquiries: sales@virtuebytech.com\n📞 Phone: +91-20-677088756\n📧 Careers: careers@virtuebytech.com\n🌐 Website contact form: virtuebytech.com/contact\n🕒 Office hours: Monday–Friday, 9 AM–6 PM IST",
+    answer:
+      "📧 Sales inquiries: sales@virtuebytech.com\n📞 Phone: +91-20-677088756\n📧 Careers: careers@virtuebytech.com\n🌐 Website contact form: virtuebytech.com/contact\n🕒 Office hours: Monday–Friday, 9 AM–6 PM IST",
     keywords: ["contact", "email", "phone", "call", "reach", "get in touch", "support", "inquiry", "enquiry", "contact us", "talk to"],
     pages: ["contact", "*"],
     intent: "contact",
@@ -389,7 +615,8 @@ export const faqData: FAQItem[] = [
   {
     id: "business-hours",
     question: "What are your business hours?",
-    answer: "Our office is open Monday to Friday, 9 AM to 6 PM IST (Indian Standard Time). For urgent inquiries outside office hours, email us at sales@virtuebytech.com and we aim to respond within 4 business hours on the next working day.",
+    answer:
+      "Our office is open Monday to Friday, 9 AM to 6 PM IST (Indian Standard Time). For urgent inquiries outside office hours, email us at sales@virtuebytech.com and we aim to respond within 4 business hours on the next working day.",
     keywords: ["business hours", "working hours", "office hours", "when open", "opening time", "available", "support hours"],
     pages: ["contact", "*"],
     intent: "contact",
@@ -397,7 +624,8 @@ export const faqData: FAQItem[] = [
   {
     id: "live-chat",
     question: "Do you offer live chat or support assistance?",
-    answer: "Yes. Our website chatbot (that's me!) is available 24/7 to answer common questions. For live agent support, use the contact form on our website during business hours (Mon–Fri, 9 AM–6 PM IST) and a team member will respond within a few hours.",
+    answer:
+      "Yes. Our website chatbot (that's me!) is available 24/7 to answer common questions. For live agent support, use the contact form on our website during business hours (Mon–Fri, 9 AM–6 PM IST) and a team member will respond within a few hours.",
     keywords: ["live chat", "support", "chatbot", "instant support", "real time support", "online chat", "chat support"],
     pages: ["contact", "*"],
     intent: "contact",
@@ -405,7 +633,8 @@ export const faqData: FAQItem[] = [
   {
     id: "consultation",
     question: "Can I schedule a consultation with your team?",
-    answer: "Absolutely! We offer a free 30-minute discovery call to understand your needs and assess how VirtueByte can help. Schedule via our website contact form at virtuebytech.com/contact or email sales@virtuebytech.com with your preferred times.",
+    answer:
+      "Absolutely! We offer a free 30-minute discovery call to understand your needs and assess how VirtueByte can help. Schedule via our website contact form at virtuebytech.com/contact or email sales@virtuebytech.com with your preferred times.",
     keywords: ["consultation", "meeting", "schedule", "free call", "discovery call", "book a call", "demo", "appointment", "free consultation"],
     pages: ["contact", "*"],
     intent: "contact",
@@ -413,7 +642,8 @@ export const faqData: FAQItem[] = [
   {
     id: "response-time",
     question: "How quickly do you respond to inquiries?",
-    answer: "We aim to respond to all inquiries within 24 business hours. Sales and project inquiries submitted via our website form or email typically receive a response within 4–8 hours during business days. For urgent matters, call us directly at +91-20-677088756.",
+    answer:
+      "We aim to respond to all inquiries within 24 business hours. Sales and project inquiries submitted via our website form or email typically receive a response within 4–8 hours during business days. For urgent matters, call us directly at +91-20-677088756.",
     keywords: ["response time", "how fast reply", "turnaround", "reply time", "when will you respond", "response speed"],
     pages: ["contact", "*"],
     intent: "contact",
@@ -421,7 +651,8 @@ export const faqData: FAQItem[] = [
   {
     id: "free-consultation",
     question: "Is the initial consultation free?",
-    answer: "Yes, the initial discovery consultation is completely free and carries no obligation. During this call we'll discuss your business challenges, technical requirements, and how VirtueByte can help — giving you a clear picture of scope, timeline, and approach before any commitment.",
+    answer:
+      "Yes, the initial discovery consultation is completely free and carries no obligation. During this call we'll discuss your business challenges, technical requirements, and how VirtueByte can help — giving you a clear picture of scope, timeline, and approach before any commitment.",
     keywords: ["free consultation", "free call", "no cost", "free assessment", "free discovery", "no obligation", "free meeting"],
     pages: ["contact", "*"],
     intent: "pricing",

@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import Image from "next/image";
+import LazyImage from "@/components/ui/LazyImage";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 
 export default function TechStackSection() {
@@ -15,12 +15,13 @@ export default function TechStackSection() {
  </AnimatedSection>
  <AnimatedSection animation="fadeIn" delay={0.2}>
  <div className="max-w-6xl mx-auto">
- <Image
+ <LazyImage
  src="/images/home/tech-stack.webp"
  alt="Technology stack and platform ecosystem diagram"
  width={1667}
  height={956}
  className="w-full h-auto rounded-[7px]"
+ sizes="(max-width: 1024px) 100vw, 1152px"
  />
  </div>
  </AnimatedSection>

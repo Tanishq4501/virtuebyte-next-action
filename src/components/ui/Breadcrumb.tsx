@@ -1,5 +1,7 @@
 ﻿import Link from "next/link";
 import { FiChevronRight, FiHome } from "react-icons/fi";
+import HeroImagePreload from "@/components/ui/HeroImagePreload";
+import { HERO_IMAGES } from "@/lib/hero-images";
 
 interface BreadcrumbProps {
  items: { label: string; href?: string }[];
@@ -14,6 +16,8 @@ export default function Breadcrumb({
  const TitleTag = titleAs;
 
  return (
+ <>
+ <HeroImagePreload href={HERO_IMAGES.subPageBanner} />
  <section
  className="relative min-h-[320px] sm:min-h-[380px] md:min-h-[450px] flex flex-col justify-center items-center -mt-[70px] pt-[130px] sm:pt-[160px] md:pt-[180px] pb-[40px] md:pb-[50px] px-5"
  style={{
@@ -56,6 +60,7 @@ export default function Breadcrumb({
  </nav>
  </div>
  </section>
+ </>
  );
 }
 

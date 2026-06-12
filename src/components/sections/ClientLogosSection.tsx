@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import Image from "next/image";
+import LazyImage from "@/components/ui/LazyImage";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -44,12 +44,13 @@ export default function ClientLogosSection() {
                     {clientLogos.map((logo, index) => (
                         <SwiperSlide key={index}>
                             <div className="flex items-center justify-center p-3 min-h-[90px]">
-                                <Image
+                                <LazyImage
                                     src={`${logo}?v=${logoVersion}`}
                                     alt={getLogoAlt(logo, index)}
                                     width={280}
                                     height={140}
                                     className="h-20 md:h-24 w-auto object-contain opacity-80 hover:opacity-100 transition-all duration-300"
+                                    sizes="280px"
                                 />
                             </div>
                         </SwiperSlide>

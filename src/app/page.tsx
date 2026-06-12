@@ -1,21 +1,10 @@
 ﻿import type { Metadata } from "next";
+import HeroImagePreload from "@/components/ui/HeroImagePreload";
+import DeferredSection from "@/components/ui/DeferredSection";
 import HeroSection from "@/components/sections/HeroSection";
-import PartnersSection from "@/components/sections/PartnersSection";
-import StrategicSection from "@/components/sections/StrategicSection";
-import ServicesSection from "@/components/sections/ServicesSection";
-import TechStackSection from "@/components/sections/TechStackSection";
-import MilestonesSection from "@/components/sections/MilestonesSection";
-import ClientLogosSection from "@/components/sections/ClientLogosSection";
-import ProductsSection from "@/components/sections/ProductsSection";
-import IndustriesSection from "@/components/sections/IndustriesSection";
-import TestimonialsSection from "@/components/sections/TestimonialsSection";
-import DifferenceSection from "@/components/sections/DifferenceSection";
-import FAQSection from "@/components/sections/FAQSection";
-import CTASection from "@/components/sections/CTASection";
-import { getCanonicalUrl } from "@/lib/seo";
-import Script from "next/script";
 import VirtuebyteIntro from "@/components/sections/VirtuebyteIntro";
-import NewProductsSection from "@/components/sections/NewProductsSection";
+import { HERO_IMAGES } from "@/lib/hero-images";
+import { getCanonicalUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
     description:
@@ -91,30 +80,24 @@ const faqSchema = {
 export default function HomePage() {
     return (
         <>
-            <Script
-                id="faq-schema"
+            <HeroImagePreload href={HERO_IMAGES.homeBanner} />
+            <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
             />
             <HeroSection />
             <VirtuebyteIntro />
-            <ClientLogosSection />
-            <PartnersSection />
-            {/*  <StrategicSection />
- */}
-
-            <ServicesSection />
-            <TechStackSection />
-            <NewProductsSection />
-            <MilestonesSection />
-            <ProductsSection />
-            {/*             <IndustriesSection />
- */}
-            <DifferenceSection />
-            <TestimonialsSection />
-                      <FAQSection />
-           <CTASection />
+            <DeferredSection section="clientLogos" minHeight="200px" />
+            <DeferredSection section="partners" minHeight="180px" />
+            <DeferredSection section="services" minHeight="320px" />
+            <DeferredSection section="techStack" minHeight="280px" />
+            <DeferredSection section="newProducts" minHeight="360px" />
+            <DeferredSection section="milestones" minHeight="240px" />
+            <DeferredSection section="products" minHeight="320px" />
+            <DeferredSection section="difference" minHeight="400px" />
+            <DeferredSection section="testimonials" minHeight="360px" />
+            <DeferredSection section="faq" minHeight="280px" />
+            <DeferredSection section="cta" minHeight="200px" />
         </>
     );
 }
-

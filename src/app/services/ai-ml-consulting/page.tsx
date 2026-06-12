@@ -207,7 +207,6 @@ export default function AiMlConsultingPage() {
  key={cIdx}
  title={card.title}
  description={card.description}
- descriptionEmphasis={card.descriptionEmphasis}
  image={card.image}
  features={card.features}
  footer={card.footer}

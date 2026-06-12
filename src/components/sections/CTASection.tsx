@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import Image from "next/image";
+import LazyImage from "@/components/ui/LazyImage";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import CTAButton from "@/components/ui/CTAButton";
 
@@ -25,12 +25,13 @@ export default function CTASection() {
  <CTAButton href="/contact/">Request a Free Consultation</CTAButton>
  </AnimatedSection>
  <AnimatedSection animation="fadeInRight" delay={0.2} className="w-full lg:w-[45%]">
- <Image
+ <LazyImage
  src="/images/home/cta-image.webp"
  alt="Business leaders collaborating on digital transformation strategy"
  width={800}
  height={476}
  className="w-full h-auto rounded-[20px]"
+ sizes="(min-width: 1024px) 45vw, 100vw"
  />
  </AnimatedSection>
  </div>

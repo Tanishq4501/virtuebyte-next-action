@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import Image from "next/image";
+import LazyImage from "@/components/ui/LazyImage";
 import SectionHeading from "@/components/ui/SectionHeading";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { FaBullseye, FaShieldAlt, FaBolt, FaHandshake } from "react-icons/fa";
@@ -66,7 +66,7 @@ export default function DifferenceSection() {
                     {/* Center Image - visible on all devices */}
                     <AnimatedSection animation="fadeIn" delay={0.2} className="flex justify-center order-3 lg:order-2">
                         <div className="bg-[#E5A2FF0A] rounded-[100px] p-[30px] lg:p-10 border border-[#E5A2FF0A]">
-                            <Image
+                            <LazyImage
                                 src="/images/home/why-choose-us.webp"
                                 alt="Illustration representing why businesses choose VirtueByte"
                                 width={400}

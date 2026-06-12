@@ -1,7 +1,9 @@
 ﻿import React from "react";
 import { Metadata } from "next";
-import Image from "next/image";
+import LazyImage from "@/components/ui/LazyImage";
 import Breadcrumb from "@/components/ui/Breadcrumb";
+import HeroImagePreload from "@/components/ui/HeroImagePreload";
+import { HERO_IMAGES } from "@/lib/hero-images";
 import SectionHeading from "@/components/ui/SectionHeading";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import IconBox from "@/components/ui/IconBox";
@@ -74,6 +76,7 @@ const operationsCards = [
 export default function VirtuElitePage() {
  return (
  <>
+ <HeroImagePreload href={HERO_IMAGES.virtueliteHero} />
  <Breadcrumb items={[{ label: "VirtuElite" }]} titleAs="p" />
 
  {/* Hero */}
@@ -97,14 +100,13 @@ export default function VirtuElitePage() {
  </p>
  </AnimatedSection>
  <AnimatedSection animation="fadeInRight" delay={0.2}>
- <Image
+ <LazyImage
  src="/images/products/virtuelite-laptop.webp"
  alt="VirtuElite event management platform dashboard on laptop"
  width={600}
  height={400}
  className="w-full h-auto rounded-[20px]"
  priority
- fetchPriority="high"
  sizes="(min-width: 1024px) 50vw, 100vw"
  />
  </AnimatedSection>
@@ -118,7 +120,7 @@ export default function VirtuElitePage() {
  <SectionHeading title="Making Every Event Success" />
  <AnimatedSection animation="fadeIn">
  <div className="bg-white rounded-[20px] p-6 md:p-10 max-w-4xl mx-auto">
- <Image
+ <LazyImage
  src="/images/products/virtuelite-workflow.webp"
  alt="VirtuElite workflow diagram for event planning lifecycle"
  width={800}
@@ -137,7 +139,7 @@ export default function VirtuElitePage() {
  <div className="relative max-w-[1280px] mx-auto px-5 lg:px-8">
  <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
  <AnimatedSection animation="fadeInLeft">
- <Image
+ <LazyImage
  src="/images/products/virtuelite-features.webp"
  alt="VirtuElite feature overview for event operations"
  width={600}

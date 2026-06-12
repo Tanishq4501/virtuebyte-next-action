@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import LazyImage from "@/components/ui/LazyImage";
 import SectionHeading from "@/components/ui/SectionHeading";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { Target, Layers, TrendingUp, CheckCircle } from "lucide-react";
@@ -87,7 +87,7 @@ export default function DifferenceSection2() {
           {/* Center Image */}
           <AnimatedSection animation="fadeIn" delay={0.2} className="flex justify-center order-3 lg:order-2">
             <div className="bg-[#E5A2FF0A] rounded-[100px] p-[30px] lg:p-10 border border-[#E5A2FF0A]">
-              <Image
+              <LazyImage
                 src="/images/home/why-choose-us.webp"
                 alt="Why choose VirtueByte"
                 width={400}

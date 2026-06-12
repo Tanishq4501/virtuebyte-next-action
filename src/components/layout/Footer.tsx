@@ -1,5 +1,6 @@
 ﻿import Link from "next/link";
-import Image from "next/image";
+import LazyBackground from "@/components/ui/LazyBackground";
+import LazyImage from "@/components/ui/LazyImage";
 import { footerData, navigation } from "@/data/navigation";
 import { FaInstagram, FaFacebookF, FaLinkedinIn, FaPhoneAlt, FaEnvelopeOpen, FaMapMarkerAlt } from "react-icons/fa";
 
@@ -12,8 +13,7 @@ const socialIcons: Record<string, React.ReactNode> = {
 export default function Footer() {
     return (
         <footer className="relative text-white overflow-hidden">
-            {/* Background image + purple overlay */}
-            <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/images/bg2.webp')" }} />
+            <LazyBackground src="/images/bg2.webp" />
             <div className="absolute inset-0 bg-[#462D84]/90" />
 
             <div className="relative max-w-[1280px] mx-auto px-5 pt-[80px]">
@@ -34,12 +34,13 @@ export default function Footer() {
                         ))}
                     </div>
                     <Link href="/" className="self-start -ml-5 md:-ml-17">
-                        <Image
+                        <LazyImage
                             src={navigation.footerLogo}
                             alt="VirtueByte logo"
                             width={220}
                             height={52}
                             className="w-[55%] sm:w-[45%] md:w-[38%] min-w-[160px] h-auto mb-6"
+                            sizes="220px"
                         />
                     </Link>
                 </div>

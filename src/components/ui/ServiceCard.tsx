@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import LazyImage from "@/components/ui/LazyImage";
 import AnimatedSection from "./AnimatedSection";
 
 interface ServiceCardProps {
@@ -31,11 +31,12 @@ export default function ServiceCard({
 
                     {/* Image */}
                     <div className="relative overflow-hidden h-56 md:h-[274px] rounded-[20px]">
-                        <Image
+                        <LazyImage
                             src={image}
                             alt={`${title} service illustration`}
                             fill
                             className="object-cover"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
                         />
                     </div>
 

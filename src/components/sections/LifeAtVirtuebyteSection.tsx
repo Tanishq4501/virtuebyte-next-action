@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import AnimatedSection from "@/components/ui/AnimatedSection";
-import Image from "next/image";
+import LazyImage from "@/components/ui/LazyImage";
 import { Lightbulb, Users, RefreshCw } from "lucide-react";
 
 const culturePoints = [
@@ -87,7 +87,7 @@ export default function LifeAtVirtuebyteSection({ galleryImages }: { galleryImag
                   key={index}
                   className="relative h-40 md:h-44 rounded-[16px] overflow-hidden group"
                 >
-                  <Image
+                  <LazyImage
                     src={img}
                     alt={`Life at VirtueByte ${index + 1}`}
                     fill

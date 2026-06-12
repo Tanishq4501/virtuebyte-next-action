@@ -1,4 +1,4 @@
-export const services = [
+﻿export const services = [
  {
  id: "salesforce-implementation",
  title: "Salesforce Implementation Services",
@@ -54,7 +54,7 @@ export const serviceDetails: Record<string, {
  breadcrumb: string;
  sections: {
  heading?: string;
- cards: { title: string; description: string; descriptionEmphasis?: boolean; image?: string; features?: string[]; footer?: string }[];
+ cards: { title: string; description: string; image?: string; features?: string[]; footer?: string }[];
  }[];
 }> = {
  "salesforce-implementation": {
@@ -151,7 +151,6 @@ export const serviceDetails: Record<string, {
  {
  title: "AI Strategy & Advisory",
  description: "Transform Ideas into Actionable AI Roadmaps",
- descriptionEmphasis: true,
  features: [
  "AI Readiness & Opportunity Assessment",
  "AI Use Case Discovery Workshops",
@@ -161,12 +160,11 @@ export const serviceDetails: Record<string, {
  ],
  footer:
  "We help organizations assess AI readiness, discover use cases, optimize workflows, and accelerate AI adoption with measurable outcomes.",
- image: "/images/new_img/Consultation and Requirement Gathering.jpeg",
+ image: "/images/new_img/Consultation and Requirement Gathering.webp",
  },
  {
  title: " Generative AI Solutions",
  description: "Enterprise AI Experiences Powered by Generative Intelligence",
- descriptionEmphasis: true,
  features: [
  "Enterprise AI Copilot Development",
  "Custom AI Chatbots & Virtual Assistants",
@@ -181,7 +179,6 @@ export const serviceDetails: Record<string, {
  {
  title: " Agentic AI Automation",
  description: "Intelligent AI Agents that Automate Operations.",
- descriptionEmphasis: true,
  features: [
  "AI Workflow Automation",
  "Autonomous AI Agents",
@@ -196,7 +193,6 @@ export const serviceDetails: Record<string, {
  {
  title: "Machine Learning Solutions",
  description: "Predictive Intelligence for Smarter Decisions.",
- descriptionEmphasis: true,
  features: [
  "Predictive Analytics & Forecasting",
  "Fraud & Anomaly Detection",
@@ -206,12 +202,11 @@ export const serviceDetails: Record<string, {
  ],
  footer:
  "Our ML systems help businesses make smarter, data-driven decisions in real time.",
- image: "/images/new_img/Data Preparation & Preprocessing.jpeg",
+ image: "/images/new_img/Data Preparation & Preprocessing.webp",
  },
  {
  title: " AI Engineering & MLOps",
  description: "Production-Ready AI Built for Scale.",
- descriptionEmphasis: true,
  features: [
  "MLOps & CI/CD Pipelines",
  "AI Model Deployment & Monitoring",
@@ -245,7 +240,7 @@ export const serviceDetails: Record<string, {
  {
  title: "Data Engineering & Integration",
  description: "Strong analytics requires strong foundations.",
- image: "/images/new_img/Data Collection & Integration.jpeg",
+ image: "/images/new_img/Data Collection & Integration.webp",
  features: ["Data pipeline architecture design", "ETL & ELT workflow development", "Data warehouse implementation", "Database optimization and performance tuning"],
  footer:
  "We build scalable data engineering systems that power business intelligence consulting and predictive analytics solutions with support from modern cloud consulting ecosystems.",
@@ -269,7 +264,7 @@ export const serviceDetails: Record<string, {
  {
  title: "Big Data & Scalable Data Platforms",
  description: "Future-ready data ecosystems.",
- image: "/images/new_img/Data Preparation & Preprocessing.jpeg",
+ image: "/images/new_img/Data Preparation & Preprocessing.webp",
  features: ["Distributed data processing architecture", "Real-time analytics consulting solutions", "Cloud-native analytics infrastructure", "AWS cloud consulting and Azure cloud consulting", "Enterprise data lake and warehouse design"],
  footer:
  "We specialize in cloud data analytics services that scale with your organization's growth and evolving data needs.",
@@ -422,7 +417,7 @@ export const serviceDetails: Record<string, {
  {
  title: "Monitoring, Logging & Performance Optimization",
  description: "Reliable systems require proactive monitoring and optimization.",
- image: "/images/new_img/DevOps Consulting Services.jpeg",
+ image: "/images/new_img/DevOps Consulting Services.webp",
  features: ["Real-time performance monitoring", "Centralized log management", "Alert systems and automated incident response", "Performance bottleneck analysis"],
  footer:
  "We help organizations move from reactive troubleshooting to proactive performance management, giving teams peace of mind and measurable stability.",
@@ -440,3 +435,4 @@ export const serviceDetails: Record<string, {
  ],
  },
 };
+

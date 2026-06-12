@@ -24,6 +24,7 @@ export async function POST(request: NextRequest) {
 
     const normalized = message.toLowerCase();
 
+    // Rule-based fast responses
     const ruleBase: Record<string, string> = {
       hello: "Hello! 👋 How can I help you with Virtuebyte services today?",
       "hi ": "Hi there! 👋 Ask me anything about Virtuebyte IT services.",
@@ -39,6 +40,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // Domain filter
     const allowedKeywords = [
       "virtuebyte", "ai", "ml", "cloud", "devops", "salesforce", "software",
       "it", "aws", "azure", "react", "node", "spring", "docker", "kubernetes", "data",
@@ -52,6 +54,7 @@ export async function POST(request: NextRequest) {
       });
     }
 
+    // Gemini LLM fallback
     const API_KEY = process.env.GEMINI_API_KEY;
 
     if (!API_KEY) {

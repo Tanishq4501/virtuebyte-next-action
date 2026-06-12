@@ -3,7 +3,14 @@
     footerLogo: "/images/logos/vb-logo.webp",
     items: [
         { label: "Home", href: "/" },
-        { label: "About Us", href: "/about/" },
+        {
+            label: "About Us",
+            href: "/about/",
+            children: [
+                { label: "About Company", href: "/about/" },
+                { label: "Career", href: "/career" },
+            ],
+        },
         {
             label: "Services",
             href: "/services/",

@@ -4,6 +4,7 @@ import { useState, FormEvent } from "react";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import SectionHeading from "@/components/ui/SectionHeading";
 import AnimatedSection from "@/components/ui/AnimatedSection";
+import MapEmbed from "@/components/ui/MapEmbed";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 
 const contactInfo = [
@@ -197,16 +198,7 @@ export default function ContactPage() {
 
  <AnimatedSection animation="fadeInRight" delay={0.2}>
  <div className="rounded-[20px] overflow-hidden h-full min-h-[320px] md:min-h-[400px]">
- <iframe
- src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.826434319712!2d73.89769147519094!3d18.491519482596466!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c11b81d1ae11%3A0x59bc1110ec77aa50!2sVirtuebyte%20Private%20Limited!5e0!3m2!1sen!2sin!4v1738230554827!5m2!1sen!2sin"
- width="100%"
- height="100%"
- style={{ border: 0, minHeight: "320px" }}
- allowFullScreen
- loading="lazy"
- referrerPolicy="no-referrer-when-downgrade"
- title="VirtueByte Office Location"
- />
+ <MapEmbed className="w-full h-full" minHeight="320px" />
  </div>
  </AnimatedSection>
  </div>

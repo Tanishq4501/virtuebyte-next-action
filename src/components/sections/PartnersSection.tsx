@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import Image from "next/image";
+import LazyImage from "@/components/ui/LazyImage";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { partners } from "@/data/content";
 
@@ -20,12 +20,13 @@ export default function PartnersSection() {
                         {partners.map((partner, index) => (
                             <AnimatedSection key={partner.name} animation="fadeInUp" delay={index * 0.1}>
                                 <div className="flex items-center justify-center p-4">
-                                    <Image
+                                    <LazyImage
                                         src={partner.image}
                                         alt={`${partner.name} logo`}
                                         width={200}
                                         height={100}
                                         className="h-[90px] md:max-h-[100px] w-[90%] object-contain opacity-80 hover:opacity-100 transition-opacity"
+                                        sizes="200px"
                                     />
                                 </div>
                             </AnimatedSection>

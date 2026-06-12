@@ -34,14 +34,14 @@ export default function Header() {
  <div className="flex items-center justify-between" style={{ minHeight: '70px' }}>
  {/* Logo */}
  <Link href="/" className="flex-shrink-0">
- <Image
- src={navigation.logo}
- alt="VirtueByte logo"
- width={300}
- height={45}
- className="h-8 lg:h-11 w-auto"
- priority
- />
+         <Image
+           src={navigation.logo}
+           alt="VirtueByte logo"
+           width={300}
+           height={45}
+           className="h-8 lg:h-11 w-auto"
+           fetchPriority="low"
+         />
  </Link>
 
  {/* Desktop Navigation */}
