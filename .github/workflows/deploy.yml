@@ -1,0 +1,84 @@
+# ============================================================
+# GitHub Actions: Build Next.js static export → Deploy to cPanel
+# ============================================================
+# SETUP REQUIRED — add these secrets in:
+#   GitHub repo → Settings → Secrets and variables → Actions
+#
+#   FTP_SERVER    cPanel FTP hostname  (e.g. ftp.virtuebytech.com)
+#   FTP_USERNAME  cPanel FTP username
+#   FTP_PASSWORD  cPanel FTP password
+#
+# NOTE: STATIC_EXPORT=true tells next.config.ts to run as a
+# pure static export (no API routes). Keystatic admin runs on
+# Vercel (which does NOT set this flag) and is not affected.
+# ============================================================
+
+name: Build and Deploy to cPanel
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint frontmatter (catch broken posts before deploy)
+        run: |
+          node -e "
+            const fs = require('fs');
+            const path = require('path');
+            const matter = require('gray-matter');
+            const dir = 'content/blog';
+            const required = ['title', 'date', 'excerpt', 'metaDescription', 'featuredImage', 'tags'];
+            let errors = 0;
+            fs.readdirSync(dir).filter(f => f.endsWith('.mdx')).forEach(file => {
+              const { data } = matter(fs.readFileSync(path.join(dir, file), 'utf-8'));
+              required.forEach(field => {
+                if (!data[field]) {
+                  console.error('MISSING field [' + field + '] in ' + file);
+                  errors++;
+                }
+              });
+            });
+            if (errors > 0) process.exit(1);
+            console.log('All frontmatter valid.');
+          "
+
+      - name: Remove Keystatic routes (Vercel-only, incompatible with static export)
+        run: |
+          # @keystatic/next crashes during Turbopack module evaluation inside
+          # a static export build — the import itself throws before Next.js
+          # can even read the route. These routes are only needed on Vercel.
+          rm -rf src/app/api/keystatic
+          rm -rf src/app/keystatic
+
+      - name: Build static export for cPanel
+        run: npm run build
+        env:
+          STATIC_EXPORT: "true"
+
+      - name: Deploy to cPanel via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./out/
+          server-dir: /
+          dangerous-clean-slate: false

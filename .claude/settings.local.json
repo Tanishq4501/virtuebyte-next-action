@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p \"D:\\\\backup2\\\\virtubyte-next\\\\public\\\\admin\")",
+      "Bash(mkdir -p \"D:\\\\backup2\\\\virtubyte-next\\\\.github\\\\workflows\")",
+      "WebFetch(domain:keystatic.com)",
+      "WebSearch",
+      "Bash(mkdir -p \"D:/backup2/virtubyte-next/src/app/keystatic/[[...params]]\")",
+      "Bash(mkdir -p \"D:/backup2/virtubyte-next/src/app/api/keystatic/[...params]\")",
+      "WebFetch(domain:www.npmjs.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:registry.npmjs.org)",
+      "Bash(node -e \":*)",
+      "Bash(node -e ' *)",
+      "Bash(npx tsc *)",
+      "Bash(npm ci *)",
+      "Bash(cp -r src/app/api/keystatic /tmp/keystatic-api-backup)",
+      "Bash(cp -r src/app/keystatic /tmp/keystatic-ui-backup)",
+      "Bash(STATIC_EXPORT=true npm run build)"
+    ]
+  }
+}
